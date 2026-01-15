@@ -2,22 +2,23 @@
 import { CONFIG } from '../data/config.js';
 
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="header">
   <nav class="nav">
-    <a href="/" class="logo">
+    <a href={base} class="logo">
       {CONFIG.nombreMarca}
     </a>
 
     <ul class="nav-links">
       <li>
-        <a href="/" class:list={["nav-link", { active: currentPath === "/" }]}>
+        <a href={base} class:list={["nav-link", { active: currentPath === base || currentPath === base.slice(0, -1) }]}>
           Inicio
         </a>
       </li>
       <li>
-        <a href="/catalogo" class:list={["nav-link", { active: currentPath === "/catalogo" || currentPath.startsWith("/producto") }]}>
+        <a href={`${base}catalogo/`} class:list={["nav-link", { active: currentPath.includes("/catalogo") || currentPath.includes("/producto") }]}>
           Catálogo
         </a>
       </li>

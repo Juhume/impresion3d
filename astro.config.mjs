@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://juhume.github.io',
   base: '/impresion3d',
+  trailingSlash: 'always',
   vite: {
     server: {
       allowedHosts: true

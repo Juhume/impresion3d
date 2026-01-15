@@ -12,6 +12,7 @@ export function getStaticPaths() {
 }
 
 const { producto } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
 const productosRelacionados = productos
   .filter(p => p.categoria === producto.categoria && p.slug !== producto.slug)
@@ -24,9 +25,9 @@ const mensajeWhatsApp = `Hola! Me interesa el producto "${producto.nombre}" que 
   <section class="product-detail">
     <div class="container">
       <nav class="breadcrumb" aria-label="Navegación">
-        <a href="/">Inicio</a>
+        <a href={base}>Inicio</a>
         <span class="separator" aria-hidden="true"></span>
-        <a href="/catalogo">Catálogo</a>
+        <a href={`${base}catalogo/`}>Catálogo</a>
         <span class="separator" aria-hidden="true"></span>
         <span class="current">{producto.nombre}</span>
       </nav>
@@ -34,7 +35,7 @@ const mensajeWhatsApp = `Hola! Me interesa el producto "${producto.nombre}" que 
       <div class="product-content">
         <div class="product-gallery">
           <div class="product-main-image">
-            <img src={producto.imagen} alt={producto.nombre} />
+            <img src={`${base}${producto.imagen.slice(1)}`} alt={producto.nombre} />
           </div>
         </div>
 

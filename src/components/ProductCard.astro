@@ -8,12 +8,13 @@ interface Props {
 }
 
 const { nombre, imagen, precio, slug, categoria } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <article class="product-card">
-  <a href={`/producto/${slug}`} class="product-link">
+  <a href={`${base}producto/${slug}/`} class="product-link">
     <div class="product-image">
-      <img src={imagen} alt={nombre} loading="lazy" />
+      <img src={`${base}${imagen.slice(1)}`} alt={nombre} loading="lazy" />
     </div>
     <div class="product-info">
       <span class="product-category">{categoria}</span>

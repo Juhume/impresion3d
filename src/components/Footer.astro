@@ -2,6 +2,7 @@
 import { CONFIG } from '../data/config.js';
 
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.mensajeBase)}`;
 ---
 
@@ -10,7 +11,7 @@ const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(
     <div class="footer-main">
       <!-- Columna 1: Marca -->
       <div class="footer-col footer-brand">
-        <a href="/" class="footer-logo">
+        <a href={base} class="footer-logo">
           <span class="logo-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/>
@@ -28,8 +29,8 @@ const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(
       <div class="footer-col footer-nav">
         <h4>Navegación</h4>
         <ul>
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/catalogo">Catálogo</a></li>
+          <li><a href={base}>Inicio</a></li>
+          <li><a href={`${base}catalogo/`}>Catálogo</a></li>
         </ul>
       </div>
 

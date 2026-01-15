@@ -5,6 +5,7 @@ import { CONFIG } from '../data/config.js';
 import productos from '../data/productos.json';
 
 const productosDestacados = productos.filter(p => p.destacado);
+const base = import.meta.env.BASE_URL;
 const whatsappLink = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.mensajeBase)}`;
 ---
 
@@ -17,7 +18,7 @@ const whatsappLink = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent
       <p class="hero-sub">Diseños originales que hacen tu espacio especial. Calidad artesanal, materiales ecológicos.</p>
 
       <div class="hero-buttons">
-        <a href="/catalogo" class="btn btn-primary">Ver catálogo</a>
+        <a href={`${base}catalogo/`} class="btn btn-primary">Ver catálogo</a>
         <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">Contactar</a>
       </div>
 
@@ -34,7 +35,7 @@ const whatsappLink = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent
     <div class="container">
       <div class="section-header">
         <h2>Productos destacados</h2>
-        <a href="/catalogo" class="link-ver-todos">Ver todos →</a>
+        <a href={`${base}catalogo/`} class="link-ver-todos">Ver todos →</a>
       </div>
       <div class="products-grid">
         {productosDestacados.map((producto) => (
