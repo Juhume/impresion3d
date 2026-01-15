@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "maceta-geometrica",
+    "nombre": "Maceta Geométrica",
+    "descripcion": "Maceta con diseño geométrico moderno, perfecta para suculentas y cactus. Disponible en varios colores.",
+    "precio": "15",
+    "categoria": "decoracion",
+    "imagen": "/images/productos/maceta-geometrica.svg",
+    "destacado": true
+  },
+  {
+    "slug": "organizador-escritorio",
+    "nombre": "Organizador de Escritorio",
+    "descripcion": "Mantén tu espacio de trabajo ordenado con este organizador modular. Compartimentos para bolígrafos, clips y más.",
+    "precio": "22",
+    "categoria": "funcional",
+    "imagen": "/images/productos/organizador-escritorio.svg",
+    "destacado": true
+  },
+  {
+    "slug": "lampara-minimal",
+    "nombre": "Lámpara Minimal",
+    "descripcion": "Lámpara de mesa con diseño minimalista. Base impresa en 3D, compatible con bombillas LED E27.",
+    "precio": "35",
+    "categoria": "iluminacion",
+    "imagen": "/images/productos/lampara-minimal.svg",
+    "destacado": true
+  },
+  {
+    "slug": "soporte-movil",
+    "nombre": "Soporte para Móvil",
+    "descripcion": "Soporte ergonómico para smartphone. Ángulo ajustable, compatible con todos los tamaños.",
+    "precio": "12",
+    "categoria": "funcional",
+    "imagen": "/images/productos/soporte-movil.svg",
+    "destacado": false
+  },
+  {
+    "slug": "jarron-ondulado",
+    "nombre": "Jarrón Ondulado",
+    "descripcion": "Jarrón decorativo con textura ondulada única. Cada pieza es ligeramente diferente.",
+    "precio": "28",
+    "categoria": "decoracion",
+    "imagen": "/images/productos/jarron-ondulado.svg",
+    "destacado": false
+  },
+  {
+    "slug": "gancho-pared",
+    "nombre": "Set Ganchos de Pared",
+    "descripcion": "Set de 3 ganchos minimalistas para pared. Perfectos para llaves, bolsos o decoración.",
+    "precio": "18",
+    "categoria": "funcional",
+    "imagen": "/images/productos/gancho-pared.svg",
+    "destacado": false
+  }
+]

@@ -1,0 +1,502 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { CONFIG } from '../data/config.js';
+import productos from '../data/productos.json';
+
+const productosDestacados = productos.filter(p => p.destacado);
+const whatsappLink = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.mensajeBase)}`;
+---
+
+<Layout>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-badge">Impresión 3D en España</span>
+      <h1>Piezas únicas, impresas para ti</h1>
+      <p class="hero-sub">Diseños originales que hacen tu espacio especial. Calidad artesanal, materiales ecológicos.</p>
+
+      <div class="hero-buttons">
+        <a href="/catalogo" class="btn btn-primary">Ver catálogo</a>
+        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">Contactar</a>
+      </div>
+
+      <div class="hero-features">
+        <span class="feature"><span class="check">✓</span> Envío a toda España</span>
+        <span class="feature"><span class="check">✓</span> Material PLA ecológico</span>
+        <span class="feature"><span class="check">✓</span> Diseños personalizables</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Productos destacados</h2>
+        <a href="/catalogo" class="link-ver-todos">Ver todos →</a>
+      </div>
+      <div class="products-grid">
+        {productosDestacados.map((producto) => (
+          <ProductCard
+            nombre={producto.nombre}
+            imagen={producto.imagen}
+            precio={producto.precio}
+            slug={producto.slug}
+            categoria={producto.categoria}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section section-gray">
+    <div class="container">
+      <h2 class="text-center">Cómo funciona</h2>
+      <p class="section-subtitle">En 3 simples pasos tienes tu pieza en casa</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Elige</h3>
+            <p>Explora el catálogo o cuéntanos tu idea personalizada</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Contacta</h3>
+            <p>Hablamos por WhatsApp para confirmar detalles y color</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Recibe</h3>
+            <p>Lo imprimimos con cariño y te lo enviamos a casa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>¿Tienes una idea en mente?</h2>
+        <p>Cuéntanos qué necesitas y lo hacemos realidad. Diseños personalizados, colores a elegir, piezas únicas.</p>
+        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">Contactar por WhatsApp</a>
+        <span class="cta-hint">Te respondemos en menos de 24h</span>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* HERO */
+  .hero {
+    width: 100%;
+    padding: 60px 0 80px 0;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f4ff 100%);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #e0e7ff;
+    color: #3b5bdb;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 16px 0;
+    line-height: 1.15;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin: 0 auto 32px auto;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .hero-features {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .feature {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #4b5563;
+  }
+
+  .check {
+    color: #22c55e;
+    font-weight: 700;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+  }
+
+  .btn-primary:hover {
+    background-color: #1d4ed8;
+  }
+
+  .btn-whatsapp {
+    background-color: #25d366;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+  }
+
+  .btn-whatsapp:hover {
+    background-color: #1fad53;
+  }
+
+  .btn-lg {
+    padding: 16px 40px;
+    font-size: 1.05rem;
+  }
+
+  /* SECTIONS */
+  .section {
+    width: 100%;
+    padding: 80px 0;
+  }
+
+  .section-gray {
+    background-color: #f9fafb;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+  }
+
+  .link-ver-todos {
+    color: #2563eb;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .link-ver-todos:hover {
+    text-decoration: underline;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 1.05rem;
+    margin: 8px 0 40px 0;
+  }
+
+  /* PRODUCTS GRID */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* STEPS */
+  .steps {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .step {
+    flex: 1;
+    max-width: 300px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50%;
+    margin-bottom: 16px;
+  }
+
+  .step h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+  }
+
+  .step p {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding-bottom: 100px;
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .cta-box h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+  }
+
+  .cta-box p {
+    font-size: 1.05rem;
+    color: #94a3b8;
+    margin: 0 auto 32px auto;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .cta-hint {
+    display: block;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps {
+      flex-wrap: wrap;
+    }
+
+    .step {
+      flex: 1 1 280px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 32px 0 40px 0;
+    }
+
+    .hero-badge {
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .hero-buttons .btn {
+      width: 100%;
+      max-width: 260px;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+    }
+
+    .hero-features {
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .feature {
+      font-size: 0.85rem;
+    }
+
+    .section {
+      padding: 40px 0;
+    }
+
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+      font-size: 1.3rem;
+    }
+
+    .link-ver-todos {
+      font-size: 0.9rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      margin: 6px 0 24px 0;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .steps {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    .step {
+      flex: none;
+      width: 100%;
+      max-width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step h3 {
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .step p {
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .cta-section {
+      padding-bottom: 60px;
+    }
+
+    .cta-box {
+      padding: 28px 20px;
+      border-radius: 14px;
+    }
+
+    .cta-box h2 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-lg {
+      width: 100%;
+      max-width: 260px;
+      padding: 12px 28px;
+      font-size: 0.95rem;
+    }
+
+    .cta-hint {
+      margin-top: 12px;
+      font-size: 0.8rem;
+    }
+  }
+</style>

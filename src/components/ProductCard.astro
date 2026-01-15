@@ -1,0 +1,144 @@
+---
+interface Props {
+  nombre: string;
+  imagen: string;
+  precio: string;
+  slug: string;
+  categoria: string;
+}
+
+const { nombre, imagen, precio, slug, categoria } = Astro.props;
+---
+
+<article class="product-card">
+  <a href={`/producto/${slug}`} class="product-link">
+    <div class="product-image">
+      <img src={imagen} alt={nombre} loading="lazy" />
+    </div>
+    <div class="product-info">
+      <span class="product-category">{categoria}</span>
+      <h3 class="product-name">{nombre}</h3>
+      <span class="product-price">{precio}€</span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .product-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+    transition: all 0.2s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+  }
+
+  .product-link {
+    display: block;
+  }
+
+  .product-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-category {
+    font-size: 0.875rem;
+    color: #2563eb;
+    text-transform: capitalize;
+    font-weight: 500;
+  }
+
+  .product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0.25rem 0;
+    color: #1a1a1a;
+  }
+
+  .product-price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .product-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .product-image {
+      padding: 1.25rem;
+    }
+
+    .product-info {
+      padding: 0.875rem;
+    }
+
+    .product-category {
+      font-size: 0.8rem;
+    }
+
+    .product-name {
+      font-size: 0.95rem;
+    }
+
+    .product-price {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-card:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: #e5e5e5;
+    }
+
+    .product-image {
+      padding: 1rem;
+    }
+
+    .product-info {
+      padding: 0.75rem;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+    }
+
+    .product-name {
+      font-size: 0.9rem;
+    }
+
+    .product-price {
+      font-size: 0.95rem;
+    }
+  }
+</style>

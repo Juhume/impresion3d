@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="lampShade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7"/>
+      <stop offset="100%" style="stop-color:#fde68a"/>
+    </linearGradient>
+    <linearGradient id="lampBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f2937"/>
+      <stop offset="100%" style="stop-color:#374151"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fef08a;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#fef08a;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="#fafafa"/>
+
+  <!-- Resplandor de luz -->
+  <ellipse cx="200" cy="150" rx="100" ry="80" fill="url(#glow)"/>
+
+  <!-- Sombra -->
+  <ellipse cx="200" cy="340" rx="70" ry="15" fill="#e5e5e5"/>
+
+  <!-- Base circular -->
+  <ellipse cx="200" cy="320" rx="55" ry="12" fill="url(#lampBase)"/>
+  <ellipse cx="200" cy="315" rx="50" ry="10" fill="#4b5563"/>
+
+  <!-- Tubo/poste -->
+  <rect x="192" y="180" width="16" height="135" fill="url(#lampBase)"/>
+  <rect x="195" y="185" width="6" height="125" fill="#6b7280" opacity="0.3"/>
+
+  <!-- Pantalla de lámpara -->
+  <path d="M130,180 Q130,100 200,100 Q270,100 270,180 Z" fill="url(#lampShade)" stroke="#f59e0b" stroke-width="2"/>
+  <path d="M145,175 Q145,115 200,115 Q255,115 255,175" fill="#fef9c3" opacity="0.5"/>
+
+  <!-- Bombilla (visible ligeramente) -->
+  <ellipse cx="200" cy="160" rx="20" ry="25" fill="#fef08a" opacity="0.6"/>
+
+  <!-- Detalles del borde superior de la pantalla -->
+  <ellipse cx="200" cy="100" rx="35" ry="8" fill="none" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- Rayos de luz decorativos -->
+  <line x1="200" y1="55" x2="200" y2="70" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <line x1="160" y1="65" x2="170" y2="78" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <line x1="240" y1="65" x2="230" y2="78" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <line x1="130" y1="90" x2="145" y2="98" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <line x1="270" y1="90" x2="255" y2="98" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+</svg>

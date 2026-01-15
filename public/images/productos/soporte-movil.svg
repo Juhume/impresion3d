@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="standGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a5b4fc"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="phoneScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1b4b"/>
+      <stop offset="100%" style="stop-color:#312e81"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#fafafa"/>
+
+  <!-- Sombra -->
+  <ellipse cx="200" cy="340" rx="90" ry="18" fill="#e5e5e5"/>
+
+  <!-- Base del soporte -->
+  <ellipse cx="200" cy="320" rx="70" ry="15" fill="url(#standGrad)"/>
+  <ellipse cx="200" cy="315" rx="65" ry="12" fill="#818cf8"/>
+
+  <!-- Brazo vertical -->
+  <rect x="185" y="240" width="30" height="80" rx="4" fill="url(#standGrad)"/>
+
+  <!-- Brazo inclinado -->
+  <rect x="175" y="160" width="50" height="90" rx="6" fill="url(#standGrad)" transform="rotate(-15 200 205)"/>
+
+  <!-- Soporte para teléfono -->
+  <rect x="155" y="135" width="90" height="20" rx="4" fill="#4f46e5" transform="rotate(-15 200 145)"/>
+
+  <!-- Teléfono -->
+  <rect x="145" y="60" width="110" height="200" rx="12" fill="#1a1a1a" transform="rotate(-15 200 160)"/>
+  <rect x="152" y="75" width="96" height="165" rx="4" fill="url(#phoneScreen)" transform="rotate(-15 200 157)"/>
+
+  <!-- Pantalla del teléfono con contenido -->
+  <rect x="160" y="90" width="80" height="45" rx="4" fill="#4f46e5" opacity="0.5" transform="rotate(-15 200 112)"/>
+  <rect x="160" y="145" width="50" height="8" rx="2" fill="#6b7280" transform="rotate(-15 185 149)"/>
+  <rect x="160" y="160" width="70" height="8" rx="2" fill="#6b7280" transform="rotate(-15 195 164)"/>
+  <rect x="160" y="175" width="40" height="8" rx="2" fill="#6b7280" transform="rotate(-15 180 179)"/>
+
+  <!-- Cámara del teléfono -->
+  <circle cx="200" cy="68" r="5" fill="#374151" transform="rotate(-15 200 68)"/>
+
+  <!-- Indicador de carga (detalle) -->
+  <circle cx="200" cy="250" r="4" fill="#22c55e"/>
+</svg>

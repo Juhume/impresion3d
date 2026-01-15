@@ -1,0 +1,397 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import productos from '../../data/productos.json';
+
+export function getStaticPaths() {
+  return productos.map(producto => ({
+    params: { slug: producto.slug },
+    props: { producto }
+  }));
+}
+
+const { producto } = Astro.props;
+
+const productosRelacionados = productos
+  .filter(p => p.categoria === producto.categoria && p.slug !== producto.slug)
+  .slice(0, 3);
+
+const mensajeWhatsApp = `Hola! Me interesa el producto "${producto.nombre}" que vi en tu web.`;
+---
+
+<Layout title={producto.nombre} description={producto.descripcion}>
+  <section class="product-detail">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Navegación">
+        <a href="/">Inicio</a>
+        <span class="separator" aria-hidden="true"></span>
+        <a href="/catalogo">Catálogo</a>
+        <span class="separator" aria-hidden="true"></span>
+        <span class="current">{producto.nombre}</span>
+      </nav>
+
+      <div class="product-content">
+        <div class="product-gallery">
+          <div class="product-main-image">
+            <img src={producto.imagen} alt={producto.nombre} />
+          </div>
+        </div>
+
+        <div class="product-info">
+          <span class="product-category">{producto.categoria}</span>
+          <h1 class="product-name">{producto.nombre}</h1>
+
+          <div class="product-price-block">
+            <p class="product-price">{producto.precio} €</p>
+            <span class="price-note">Precio orientativo</span>
+          </div>
+
+          <p class="product-description">{producto.descripcion}</p>
+
+          <div class="product-actions">
+            <WhatsAppButton mensaje={mensajeWhatsApp} texto="Consultar por WhatsApp" />
+            <p class="action-hint">Te respondemos en menos de 24h</p>
+          </div>
+
+          <div class="product-details">
+            <h3>Características</h3>
+            <ul>
+              <li>Material: PLA ecológico</li>
+              <li>Impresión bajo demanda</li>
+              <li>Colores personalizables</li>
+              <li>Envío a toda España</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {productosRelacionados.length > 0 && (
+        <div class="related-products">
+          <h2>Productos relacionados</h2>
+          <div class="products-grid">
+            {productosRelacionados.map(p => (
+              <ProductCard
+                nombre={p.nombre}
+                imagen={p.imagen}
+                precio={p.precio}
+                slug={p.slug}
+                categoria={p.categoria}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .product-detail {
+    padding: 24px 0 60px;
+  }
+
+  /* Breadcrumb mejorado */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: #666;
+    transition: color 0.15s ease;
+  }
+
+  .breadcrumb a:hover {
+    color: #2563eb;
+  }
+
+  .breadcrumb .separator {
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .breadcrumb .current {
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  /* Layout principal */
+  .product-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* Imagen */
+  .product-main-image {
+    aspect-ratio: 1;
+    background-color: #f8f8f8;
+    border-radius: 16px;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: sticky;
+    top: 100px;
+  }
+
+  .product-main-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  /* Info del producto */
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .product-category {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #2563eb;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .product-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin: 0 0 16px 0;
+  }
+
+  /* Bloque de precio */
+  .product-price-block {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .product-price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .price-note {
+    font-size: 0.8rem;
+    color: #888;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Descripción */
+  .product-description {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0 0 24px 0;
+  }
+
+  /* Acciones */
+  .product-actions {
+    margin-bottom: 24px;
+  }
+
+  .action-hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 8px;
+  }
+
+  /* Detalles/Características */
+  .product-details {
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+  }
+
+  .product-details h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    color: #1a1a1a;
+  }
+
+  .product-details ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .product-details li {
+    color: #555;
+    font-size: 0.9rem;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .product-details li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: #2563eb;
+    border-radius: 50%;
+  }
+
+  /* Productos relacionados */
+  .related-products {
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid #eee;
+  }
+
+  .related-products h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 24px 0;
+    color: #1a1a1a;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-content {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .product-main-image {
+      position: static;
+    }
+
+    .product-name {
+      font-size: 1.5rem;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-detail {
+      padding: 16px 0 40px;
+    }
+
+    .breadcrumb {
+      font-size: 0.8rem;
+      margin-bottom: 1.25rem;
+      gap: 6px;
+    }
+
+    .breadcrumb .separator {
+      width: 14px;
+      height: 14px;
+    }
+
+    .product-content {
+      gap: 24px;
+    }
+
+    .product-main-image {
+      padding: 1.25rem;
+      border-radius: 12px;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+      margin-bottom: 6px;
+    }
+
+    .product-name {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .product-price-block {
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .product-price {
+      font-size: 1.35rem;
+    }
+
+    .price-note {
+      font-size: 0.75rem;
+    }
+
+    .product-description {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .product-actions {
+      margin-bottom: 20px;
+    }
+
+    .product-details {
+      padding-top: 20px;
+    }
+
+    .product-details h3 {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .product-details li {
+      font-size: 0.85rem;
+      padding-left: 16px;
+    }
+
+    .product-details li::before {
+      width: 6px;
+      height: 6px;
+      top: 7px;
+    }
+
+    .related-products {
+      margin-top: 48px;
+      padding-top: 32px;
+    }
+
+    .related-products h2 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+  }
+</style>
