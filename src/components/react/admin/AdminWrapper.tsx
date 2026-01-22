@@ -74,10 +74,10 @@ export default function AdminWrapper({ children }: Props) {
           <div className="auth-icon">🔒</div>
           <h2>Acceso restringido</h2>
           <p>Debes iniciar sesión para acceder al panel de administración.</p>
-          <a href="/impresion3d/auth/login/" className="btn-primary">
+          <a href={`${import.meta.env.BASE_URL}auth/login/`} className="btn-primary">
             Iniciar sesión
           </a>
-          <a href="/impresion3d/" className="btn-secondary">
+          <a href={import.meta.env.BASE_URL} className="btn-secondary">
             Volver a la tienda
           </a>
         </div>
@@ -93,7 +93,7 @@ export default function AdminWrapper({ children }: Props) {
           <h2>Sin permisos</h2>
           <p>Tu cuenta no tiene permisos de administrador.</p>
           {user?.email && <p className="user-email">{user.email}</p>}
-          <a href="/impresion3d/" className="btn-primary">
+          <a href={import.meta.env.BASE_URL} className="btn-primary">
             Volver a la tienda
           </a>
         </div>

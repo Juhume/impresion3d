@@ -94,7 +94,7 @@ export default function OrderHistory() {
     return (
       <div className="orders-login-required">
         <p>Debes iniciar sesión para ver tus pedidos.</p>
-        <a href="/impresion3d/auth/login/" className="btn-primary">
+        <a href={`${import.meta.env.BASE_URL}auth/login/`} className="btn-primary">
           Iniciar sesión
         </a>
       </div>
@@ -109,7 +109,7 @@ export default function OrderHistory() {
         <div className="orders-empty">
           <div className="empty-icon">📦</div>
           <p>Aún no has realizado ningún pedido</p>
-          <a href="/impresion3d/catalogo/" className="btn-primary">
+          <a href={`${import.meta.env.BASE_URL}catalogo/`} className="btn-primary">
             Explorar catálogo
           </a>
         </div>

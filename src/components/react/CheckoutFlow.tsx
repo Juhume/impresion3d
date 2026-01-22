@@ -14,7 +14,7 @@ interface Props {
   baseUrl?: string;
 }
 
-export default function CheckoutFlow({ baseUrl = '/impresion3d/' }: Props) {
+export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Props) {
   const { user, isLoading: authLoading, isInitialized } = useAuthStore();
   const { items, getSubtotal, getTax, getTotal, clearCart } = useCartStore();
 

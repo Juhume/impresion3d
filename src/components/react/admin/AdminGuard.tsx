@@ -100,7 +100,7 @@ export default function AdminGuard({ children }: Props) {
         <div className="guard-icon">🔒</div>
         <h2>Acceso restringido</h2>
         <p>Debes iniciar sesión para acceder al panel de administración.</p>
-        <a href="/impresion3d/auth/login/" className="btn-login">
+        <a href={`${import.meta.env.BASE_URL}auth/login/`} className="btn-login">
           Iniciar sesión
         </a>
         <style>{`
@@ -155,7 +155,7 @@ export default function AdminGuard({ children }: Props) {
         <h2>Sin permisos de administrador</h2>
         <p>Tu cuenta no tiene permisos para acceder al panel de administración.</p>
         <p className="user-email">{user?.email}</p>
-        <a href="/impresion3d/" className="btn-back">
+        <a href={import.meta.env.BASE_URL} className="btn-back">
           Volver a la tienda
         </a>
         <style>{`

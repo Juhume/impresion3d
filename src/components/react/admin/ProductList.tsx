@@ -129,7 +129,7 @@ export default function ProductList() {
           </select>
         </div>
 
-        <a href="/impresion3d/admin/productos/nuevo/" className="btn-new">
+        <a href={`${import.meta.env.BASE_URL}admin/productos/nuevo/`} className="btn-new">
           + Nuevo producto
         </a>
       </div>
@@ -138,7 +138,7 @@ export default function ProductList() {
         <div className="empty-state">
           <p>No se encontraron productos</p>
           {products.length === 0 && (
-            <a href="/impresion3d/admin/productos/nuevo/" className="btn-primary">
+            <a href={`${import.meta.env.BASE_URL}admin/productos/nuevo/`} className="btn-primary">
               Crear primer producto
             </a>
           )}
@@ -204,7 +204,7 @@ export default function ProductList() {
                   </td>
                   <td className="actions-cell">
                     <a
-                      href={`/impresion3d/admin/productos/editar/?id=${product.id}`}
+                      href={`${import.meta.env.BASE_URL}admin/productos/editar/?id=${product.id}`}
                       className="btn-action edit"
                       title="Editar"
                     >

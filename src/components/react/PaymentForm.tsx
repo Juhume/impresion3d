@@ -39,7 +39,7 @@ function PaymentFormInner({
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${window.location.origin}/impresion3d/checkout/confirmacion/`,
+          return_url: `${window.location.origin}${import.meta.env.BASE_URL}checkout/confirmacion/`,
         },
       });
 

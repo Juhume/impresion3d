@@ -274,7 +274,7 @@ export default function ProductForm({ productId }: Props) {
 
       // Redirigir después de un momento
       setTimeout(() => {
-        window.location.href = '/impresion3d/admin/productos/';
+        window.location.href = `${import.meta.env.BASE_URL}admin/productos/`;
       }, 1500);
     } catch (err) {
       console.error('Error saving product:', err);
@@ -647,7 +647,7 @@ export default function ProductForm({ productId }: Props) {
       </div>
 
       <div className="form-actions">
-        <a href="/impresion3d/admin/productos/" className="btn-cancel">
+        <a href={`${import.meta.env.BASE_URL}admin/productos/`} className="btn-cancel">
           Cancelar
         </a>
         <button type="submit" className="btn-submit" disabled={saving}>

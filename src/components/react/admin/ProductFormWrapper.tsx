@@ -48,7 +48,7 @@ function ProductFormContent() {
     return (
       <div className="error-state">
         <p>No se especificó ningún producto</p>
-        <a href="/impresion3d/admin/productos/" className="btn-back">
+        <a href={`${import.meta.env.BASE_URL}admin/productos/`} className="btn-back">
           Volver a productos
         </a>
         <style>{`

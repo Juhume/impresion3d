@@ -221,7 +221,7 @@ export default function Dashboard() {
               </table>
             </div>
           )}
-          <a href="/impresion3d/admin/pedidos/" className="view-all-link">
+          <a href={`${import.meta.env.BASE_URL}admin/pedidos/`} className="view-all-link">
             Ver todos los pedidos →
           </a>
         </section>
@@ -242,7 +242,7 @@ export default function Dashboard() {
               ))}
             </ul>
           )}
-          <a href="/impresion3d/admin/productos/" className="view-all-link">
+          <a href={`${import.meta.env.BASE_URL}admin/productos/`} className="view-all-link">
             Ver todos los productos →
           </a>
         </section>

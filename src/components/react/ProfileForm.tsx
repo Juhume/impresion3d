@@ -97,7 +97,7 @@ export default function ProfileForm() {
     return (
       <div className="profile-login-required">
         <p>Debes iniciar sesión para ver tu perfil.</p>
-        <a href="/impresion3d/auth/login/" className="btn-primary">
+        <a href={`${import.meta.env.BASE_URL}auth/login/`} className="btn-primary">
           Iniciar sesión
         </a>
       </div>
