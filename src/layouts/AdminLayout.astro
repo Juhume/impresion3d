@@ -1,0 +1,243 @@
+---
+import AuthProvider from '../components/react/AuthProvider';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <title>{title} | Admin</title>
+  </head>
+  <body>
+    <AuthProvider client:load />
+
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <div class="sidebar-header">
+          <a href={`${base}admin/`} class="logo">
+            <span class="logo-icon">⚙️</span>
+            <span class="logo-text">Admin</span>
+          </a>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href={`${base}admin/`} class="nav-item">
+            <span class="nav-icon">📊</span>
+            Dashboard
+          </a>
+          <a href={`${base}admin/productos/`} class="nav-item">
+            <span class="nav-icon">📦</span>
+            Productos
+          </a>
+          <a href={`${base}admin/pedidos/`} class="nav-item">
+            <span class="nav-icon">🛒</span>
+            Pedidos
+          </a>
+          <a href={`${base}admin/categorias/`} class="nav-item">
+            <span class="nav-icon">🏷️</span>
+            Categorías
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href={base} class="nav-item back-link">
+            <span class="nav-icon">←</span>
+            Volver a la tienda
+          </a>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <h1>{title}</h1>
+        </header>
+
+        <div class="admin-content">
+          <slot />
+        </div>
+      </main>
+    </div>
+
+    <style is:global>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #f3f4f6;
+        color: #111827;
+        line-height: 1.5;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button {
+        font-family: inherit;
+      }
+    </style>
+
+    <style>
+      .admin-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        min-height: 100vh;
+      }
+
+      .admin-sidebar {
+        background-color: #1f2937;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        width: 240px;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .sidebar-header {
+        padding: 20px;
+        border-bottom: 1px solid #374151;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-icon {
+        font-size: 1.5rem;
+      }
+
+      .logo-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .sidebar-nav {
+        flex: 1;
+        padding: 16px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: background-color 0.15s;
+      }
+
+      .nav-item:hover {
+        background-color: #374151;
+      }
+
+      .nav-icon {
+        font-size: 1.1rem;
+      }
+
+      .sidebar-footer {
+        padding: 16px 12px;
+        border-top: 1px solid #374151;
+      }
+
+      .back-link {
+        color: #9ca3af;
+        font-size: 0.9rem;
+      }
+
+      .back-link:hover {
+        color: white;
+      }
+
+      .admin-main {
+        margin-left: 240px;
+        min-height: 100vh;
+      }
+
+      .admin-header {
+        background-color: white;
+        padding: 20px 32px;
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .admin-header h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .admin-content {
+        padding: 32px;
+      }
+
+      @media (max-width: 900px) {
+        .admin-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .admin-sidebar {
+          position: relative;
+          width: 100%;
+          height: auto;
+        }
+
+        .admin-main {
+          margin-left: 0;
+        }
+
+        .sidebar-nav {
+          flex-direction: row;
+          overflow-x: auto;
+          padding: 12px;
+        }
+
+        .nav-item {
+          white-space: nowrap;
+          padding: 10px 14px;
+        }
+
+        .sidebar-footer {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .admin-content {
+          padding: 16px;
+        }
+
+        .admin-header {
+          padding: 16px;
+        }
+
+        .admin-header h1 {
+          font-size: 1.25rem;
+        }
+      }
+    </style>
+  </body>
+</html>

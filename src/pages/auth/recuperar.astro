@@ -1,0 +1,230 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AuthProvider from '../../components/react/AuthProvider';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Recuperar contraseña" description="Recupera el acceso a tu cuenta">
+  <section class="auth-page">
+    <div class="container">
+      <div class="auth-card">
+        <AuthProvider client:load>
+          <div class="reset-form" id="reset-form">
+            <h2>Recuperar contraseña</h2>
+            <p class="subtitle">Te enviaremos un email para restablecer tu contraseña</p>
+
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <div id="success-message" class="success-message" style="display: none;"></div>
+
+            <form id="reset-password-form">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="tu@email.com"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="submit-btn">
+                Enviar email
+              </button>
+            </form>
+
+            <div class="auth-links">
+              <a href={`${base}auth/login/`}>Volver a iniciar sesión</a>
+            </div>
+          </div>
+        </AuthProvider>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .auth-page {
+    padding: 60px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .auth-card {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .reset-form h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    text-align: center;
+  }
+
+  .subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+  }
+
+  .success-message {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #16a34a;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #374151;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.15s ease;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: #2563eb;
+    color: white;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: #1d4ed8;
+  }
+
+  .auth-links {
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  .auth-links a {
+    color: #2563eb;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .auth-links a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    .auth-page {
+      padding: 40px 0;
+    }
+
+    .auth-card {
+      padding: 24px;
+      margin: 0 16px;
+    }
+  }
+</style>
+
+<script>
+  import { sendPasswordResetEmail } from 'firebase/auth';
+  import { getFirebaseAuth, isFirebaseConfigured } from '../../lib/firebase';
+
+  const form = document.getElementById('reset-password-form') as HTMLFormElement;
+  const emailInput = document.getElementById('email') as HTMLInputElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const errorDiv = document.getElementById('error-message') as HTMLDivElement;
+  const successDiv = document.getElementById('success-message') as HTMLDivElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!isFirebaseConfigured()) {
+      errorDiv.textContent = 'Firebase no está configurado';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    const email = emailInput.value.trim();
+
+    if (!email) {
+      errorDiv.textContent = 'Por favor ingresa tu email';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    errorDiv.style.display = 'none';
+    successDiv.style.display = 'none';
+
+    try {
+      const auth = getFirebaseAuth();
+      await sendPasswordResetEmail(auth, email);
+
+      successDiv.textContent = 'Email enviado. Revisa tu bandeja de entrada.';
+      successDiv.style.display = 'block';
+      form.style.display = 'none';
+    } catch (error: any) {
+      let message = 'Ha ocurrido un error. Inténtalo de nuevo.';
+
+      if (error.code === 'auth/user-not-found') {
+        message = 'No existe una cuenta con este email';
+      } else if (error.code === 'auth/invalid-email') {
+        message = 'Email no válido';
+      }
+
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar email';
+    }
+  });
+</script>

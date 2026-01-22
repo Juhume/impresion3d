@@ -4,260 +4,632 @@ import { CONFIG } from '../data/config.js';
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
 const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.mensajeBase)}`;
+
+const navLinks = [
+  { href: base, label: 'Inicio' },
+  { href: `${base}catalogo/`, label: 'Catálogo' },
+];
+
+const specs = [
+  { label: 'Tecnología', value: 'FDM / Resina', icon: 'tech' },
+  { label: 'Precisión', value: '0.1mm', icon: 'precision' },
+  { label: 'Materiales', value: 'PLA, PETG, ABS', icon: 'material' },
+];
 ---
 
 <footer class="footer">
-  <div class="footer-container">
+  <!-- Top gradient accent -->
+  <div class="footer-glow" aria-hidden="true">
+    <div class="glow-orb"></div>
+  </div>
+
+  <div class="footer-content container">
+    <!-- Main section with large branding -->
     <div class="footer-main">
-      <!-- Columna 1: Marca -->
-      <div class="footer-col footer-brand">
-        <a href={base} class="footer-logo">
-          <span class="logo-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/>
-              <path d="M12 12l8-4.5"/>
-              <path d="M12 12v9"/>
-              <path d="M12 12L4 7.5"/>
+      <!-- Brand section -->
+      <div class="footer-brand">
+        <a href={base} class="brand-link">
+          <div class="brand-logo">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="footer-logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:var(--color-accent)"/>
+                  <stop offset="100%" style="stop-color:var(--color-accent-light)"/>
+                </linearGradient>
+              </defs>
+              <path d="M24 4L8 13v22l16 9 16-9V13L24 4z" stroke="url(#footer-logo-gradient)" stroke-width="1.5" fill="none"/>
+              <path d="M24 24L8 13M24 24l16-11M24 24v20" stroke="url(#footer-logo-gradient)" stroke-width="1.5"/>
+              <circle cx="24" cy="24" r="4" fill="url(#footer-logo-gradient)" opacity="0.6"/>
             </svg>
-          </span>
-          {CONFIG.nombreMarca}
+            <div class="logo-glow" aria-hidden="true"></div>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">{CONFIG.nombreMarca}</span>
+            <span class="brand-tagline mono">3D Print Studio</span>
+          </div>
         </a>
-        <p class="footer-tagline">{CONFIG.descripcion}</p>
+
+        <p class="brand-mission">
+          Transformamos ideas en objetos tangibles. Cada pieza es fabricada con
+          <span class="highlight">precisión milimétrica</span> y
+          <span class="highlight">materiales premium</span>.
+        </p>
       </div>
 
-      <!-- Columna 2: Navegación -->
-      <div class="footer-col footer-nav">
-        <h4>Navegación</h4>
-        <ul>
-          <li><a href={base}>Inicio</a></li>
-          <li><a href={`${base}catalogo/`}>Catálogo</a></li>
-        </ul>
-      </div>
+      <!-- Quick links and contact -->
+      <div class="footer-links">
+        <div class="links-group">
+          <h4 class="group-title">
+            <span class="title-line" aria-hidden="true"></span>
+            <span>Explorar</span>
+          </h4>
+          <nav class="nav-links" role="navigation" aria-label="Footer navigation">
+            {navLinks.map((link) => (
+              <a href={link.href} class="nav-link">
+                <span class="link-text">{link.label}</span>
+                <span class="link-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                  </svg>
+                </span>
+              </a>
+            ))}
+          </nav>
+        </div>
 
-      <!-- Columna 3: Contacto -->
-      <div class="footer-col footer-contact">
-        <h4>Contacto</h4>
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="whatsapp-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Escríbenos
-        </a>
-        <p class="response-time">Respondemos en 24h</p>
+        <div class="links-group">
+          <h4 class="group-title">
+            <span class="title-line" aria-hidden="true"></span>
+            <span>Contacto</span>
+          </h4>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+            <div class="cta-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </div>
+            <div class="cta-content">
+              <span class="cta-label">Escríbenos</span>
+              <span class="cta-hint mono">Respuesta en menos de 24h</span>
+            </div>
+            <div class="cta-status">
+              <span class="status-dot"></span>
+              <span class="status-ping" aria-hidden="true"></span>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
 
-    <div class="footer-divider"></div>
+    <!-- Tech specs bar -->
+    <div class="specs-bar">
+      <div class="specs-label mono">
+        <span class="label-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+        </span>
+        Especificaciones técnicas
+      </div>
+      <div class="specs-grid">
+        {specs.map((spec) => (
+          <div class="spec-item">
+            <span class="spec-value mono">{spec.value}</span>
+            <span class="spec-label">{spec.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
 
+    <!-- Bottom bar -->
     <div class="footer-bottom">
-      <p class="copyright">&copy; {year} {CONFIG.nombreMarca}</p>
-      <p class="made-with">Hecho con <span class="heart">♥</span> en España</p>
+      <div class="bottom-left">
+        <span class="copyright mono">&copy; {year} {CONFIG.nombreMarca}</span>
+        <span class="separator" aria-hidden="true">/</span>
+        <span class="location">
+          Fabricado con <span class="text-accent">precisión</span> en España
+        </span>
+      </div>
+      <div class="bottom-right">
+        <span class="version mono">v1.0</span>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    width: 100%;
-    background: linear-gradient(180deg, #f8f9fa 0%, #f1f3f5 100%);
-    border-top: 1px solid #e5e7eb;
+    position: relative;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    overflow: hidden;
   }
 
-  .footer-container {
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 48px 24px 32px 24px;
-    box-sizing: border-box;
+  /* Glow effect */
+  .footer-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    pointer-events: none;
+    overflow: hidden;
   }
 
+  .glow-orb {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 300px;
+    background: radial-gradient(ellipse at center, var(--color-accent-glow) 0%, transparent 70%);
+    opacity: 0.4;
+  }
+
+  .footer-content {
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  /* Main section */
   .footer-main {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .footer-col {
-    flex: 1 1 auto;
-    min-width: 150px;
-  }
-
+  /* Brand */
   .footer-brand {
-    flex: 2 1 250px;
-    max-width: 300px;
+    max-width: 480px;
   }
 
-  .footer-nav,
-  .footer-contact {
-    flex: 1 1 150px;
-  }
-
-  /* Logo */
-  .footer-logo {
-    display: inline-flex;
-    flex-direction: row;
+  .brand-link {
+    display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #1a1a1a;
+    gap: 20px;
     text-decoration: none;
+    margin-bottom: 28px;
   }
 
-  .footer-logo:hover {
-    color: #2563eb;
-  }
-
-  .logo-icon {
-    display: inline-flex;
+  .brand-logo {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: white;
-    border-radius: 8px;
-    flex-shrink: 0;
   }
 
-  .footer-tagline {
-    color: #6b7280;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 12px 0 0 0;
+  .brand-logo svg {
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-base);
   }
 
-  /* Títulos de sección */
-  .footer-nav h4,
-  .footer-contact h4 {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #9ca3af;
-    margin: 0 0 14px 0;
+  .brand-link:hover .brand-logo svg {
+    transform: rotate(10deg) scale(1.05);
   }
 
-  /* Links de navegación */
-  .footer-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .logo-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .brand-link:hover .logo-glow {
+    opacity: 1;
+  }
+
+  .brand-text {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px;
   }
 
-  .footer-nav li {
+  .brand-name {
+    font-family: 'Space Grotesk', var(--font-display), sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+
+  .brand-tagline {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+  }
+
+  .brand-mission {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
     margin: 0;
-    padding: 0;
   }
 
-  .footer-nav a {
-    color: #4b5563;
-    font-size: 0.95rem;
-    text-decoration: none;
+  .brand-mission .highlight {
+    color: var(--color-text);
+    font-weight: 500;
   }
 
-  .footer-nav a:hover {
-    color: #2563eb;
+  /* Links */
+  .footer-links {
+    display: flex;
+    gap: 60px;
   }
 
-  /* WhatsApp link */
-  .whatsapp-link {
+  .links-group {
+    flex: 1;
+  }
+
+  .group-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    margin: 0 0 24px;
+  }
+
+  .title-line {
+    width: 24px;
+    height: 1px;
+    background: var(--gradient-primary);
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-link {
     display: inline-flex;
-    flex-direction: row;
     align-items: center;
     gap: 8px;
-    color: #25d366;
-    font-size: 0.95rem;
-    font-weight: 500;
+    color: var(--color-text-secondary);
     text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
   }
 
-  .whatsapp-link:hover {
-    color: #1da851;
+  .nav-link:hover {
+    color: var(--color-text);
   }
 
-  .response-time {
-    color: #9ca3af;
-    font-size: 0.8rem;
-    margin: 8px 0 0 0;
+  .link-arrow {
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all var(--transition-fast);
+    color: var(--color-accent);
   }
 
-  /* Divider */
-  .footer-divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #d1d5db 50%, transparent 100%);
-    margin-bottom: 24px;
+  .nav-link:hover .link-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
   }
 
-  /* Bottom */
-  .footer-bottom {
-    width: 100%;
+  /* WhatsApp CTA */
+  .whatsapp-cta {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: all var(--transition-base);
+  }
+
+  .whatsapp-cta:hover {
+    border-color: #25D366;
+    background: rgba(37, 211, 102, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .cta-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #25D366;
+    border-radius: var(--radius-md);
+    color: white;
+    transition: all var(--transition-fast);
+  }
+
+  .cta-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .whatsapp-cta:hover .cta-icon {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  }
+
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .cta-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .cta-hint {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+  }
+
+  .cta-status {
+    position: relative;
+    width: 12px;
+    height: 12px;
+  }
+
+  .status-dot {
+    position: absolute;
+    inset: 2px;
+    background: #22c55e;
+    border-radius: 50%;
+  }
+
+  .status-ping {
+    position: absolute;
+    inset: 0;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 0.8; }
+    75%, 100% { transform: scale(2); opacity: 0; }
+  }
+
+  /* Specs bar */
+  .specs-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .specs-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+  }
+
+  .label-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-accent);
+  }
+
+  .label-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .specs-grid {
+    display: flex;
+    gap: 48px;
+  }
+
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .spec-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-accent-light);
+  }
+
+  .spec-label {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 24px;
+  }
+
+  .bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
   }
 
   .copyright {
-    color: #9ca3af;
-    font-size: 0.85rem;
-    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
   }
 
-  .made-with {
-    color: #9ca3af;
+  .separator {
+    opacity: 0.3;
+  }
+
+  .location {
     font-size: 0.85rem;
-    margin: 0;
-    display: inline-flex;
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .bottom-right {
+    display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 16px;
   }
 
-  .heart {
-    color: #ef4444;
-    font-size: 1rem;
+  .version {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    padding: 4px 10px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.05em;
   }
 
-  /* Mobile */
-  @media (max-width: 640px) {
-    .footer-container {
-      padding: 12px 16px;
+  /* Responsive */
+  @media (max-width: 900px) {
+    .footer-content {
+      padding-top: 60px;
     }
 
-    .footer-main,
-    .footer-divider {
-      display: none;
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .footer-brand {
+      max-width: none;
+    }
+
+    .footer-links {
+      gap: 40px;
+    }
+
+    .specs-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .specs-grid {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .spec-item {
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-content {
+      padding-top: 48px;
+      padding-bottom: 32px;
+    }
+
+    .footer-main {
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+
+    .brand-link {
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+    }
+
+    .brand-mission {
+      font-size: 0.95rem;
+    }
+
+    .footer-links {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .whatsapp-cta {
+      padding: 16px;
+    }
+
+    .cta-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .specs-grid {
+      flex-wrap: wrap;
+      gap: 20px 32px;
     }
 
     .footer-bottom {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .bottom-left {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .separator {
+      display: none;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .specs-grid {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .spec-item {
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
     }
 
-    .copyright,
-    .made-with {
-      font-size: 0.75rem;
-    }
-
-    .copyright::after {
-      content: "·";
-      margin-left: 6px;
-    }
-
-    .heart {
-      font-size: 0.8rem;
+    .spec-item:last-child {
+      border-bottom: none;
     }
   }
 </style>

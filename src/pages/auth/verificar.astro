@@ -1,0 +1,172 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Verifica tu email" description="Confirma tu dirección de email">
+  <section class="verify-page">
+    <div class="container">
+      <div class="verify-card">
+        <div class="verify-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.5">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+        </div>
+
+        <h1>Revisa tu email</h1>
+        <p class="subtitle">
+          Te hemos enviado un email de verificación.
+          Haz clic en el enlace del email para activar tu cuenta.
+        </p>
+
+        <div class="verify-actions">
+          <button id="resend-btn" class="btn btn-secondary">
+            Reenviar email
+          </button>
+          <a href={`${base}auth/login/`} class="btn btn-primary">
+            Ir a iniciar sesión
+          </a>
+        </div>
+
+        <p class="help-text">
+          ¿No encuentras el email? Revisa tu carpeta de spam.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .verify-page {
+    padding: 60px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .verify-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    text-align: center;
+  }
+
+  .verify-icon {
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: #1a1a1a;
+  }
+
+  .subtitle {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .verify-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: #2563eb;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #1d4ed8;
+  }
+
+  .btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: #e5e7eb;
+  }
+
+  .help-text {
+    color: #9ca3af;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    .verify-page {
+      padding: 40px 0;
+    }
+
+    .verify-card {
+      padding: 32px 24px;
+      margin: 0 16px;
+    }
+  }
+</style>
+
+<script>
+  import { sendEmailVerification } from 'firebase/auth';
+  import { getFirebaseAuth, isFirebaseConfigured } from '../../lib/firebase';
+
+  const resendBtn = document.getElementById('resend-btn') as HTMLButtonElement;
+
+  resendBtn?.addEventListener('click', async () => {
+    if (!isFirebaseConfigured()) {
+      alert('Firebase no está configurado');
+      return;
+    }
+
+    const auth = getFirebaseAuth();
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert('No hay sesión activa. Por favor inicia sesión primero.');
+      return;
+    }
+
+    resendBtn.disabled = true;
+    resendBtn.textContent = 'Enviando...';
+
+    try {
+      await sendEmailVerification(user);
+      resendBtn.textContent = 'Email enviado';
+
+      setTimeout(() => {
+        resendBtn.textContent = 'Reenviar email';
+        resendBtn.disabled = false;
+      }, 3000);
+    } catch (error) {
+      console.error('Error sending verification email:', error);
+      resendBtn.textContent = 'Error. Inténtalo de nuevo';
+      resendBtn.disabled = false;
+    }
+  });
+</script>

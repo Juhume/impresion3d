@@ -1,0 +1,8 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import AdminProductList from '../../../components/react/admin/AdminProductList';
+---
+
+<AdminLayout title="Productos">
+  <AdminProductList client:load />
+</AdminLayout>

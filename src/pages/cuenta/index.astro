@@ -1,0 +1,193 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProfileForm from '../../components/react/ProfileForm';
+import AuthProvider from '../../components/react/AuthProvider';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Mi perfil" description="Gestiona tu información personal">
+  <section class="account-section">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Navegación">
+        <a href={base}>Inicio</a>
+        <span class="separator" aria-hidden="true"></span>
+        <span class="current">Mi cuenta</span>
+      </nav>
+
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-nav">
+            <a href={`${base}cuenta/`} class="nav-link active">
+              <span class="nav-icon">👤</span>
+              Mi perfil
+            </a>
+            <a href={`${base}cuenta/direcciones/`} class="nav-link">
+              <span class="nav-icon">📍</span>
+              Direcciones
+            </a>
+            <a href={`${base}cuenta/pedidos/`} class="nav-link">
+              <span class="nav-icon">📦</span>
+              Mis pedidos
+            </a>
+          </nav>
+        </aside>
+
+        <main class="account-main">
+          <h1>Mi perfil</h1>
+          <p class="section-description">Gestiona tu información personal</p>
+
+          <AuthProvider client:load />
+          <ProfileForm client:load />
+        </main>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .account-section {
+    padding: 24px 0 60px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: #666;
+    transition: color 0.15s ease;
+  }
+
+  .breadcrumb a:hover {
+    color: #2563eb;
+  }
+
+  .breadcrumb .separator {
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .breadcrumb .current {
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .account-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .account-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  .account-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #4b5563;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+
+  .nav-link.active {
+    background-color: #eff6ff;
+    color: #2563eb;
+  }
+
+  .nav-icon {
+    font-size: 1.1rem;
+  }
+
+  .account-main {
+    min-height: 400px;
+  }
+
+  .account-main h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px 0;
+  }
+
+  .section-description {
+    color: #6b7280;
+    margin: 0 0 32px 0;
+  }
+
+  @media (max-width: 768px) {
+    .account-layout {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .account-sidebar {
+      position: static;
+    }
+
+    .account-nav {
+      flex-direction: row;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin: 0 -16px;
+      padding: 0 16px;
+    }
+
+    .nav-link {
+      white-space: nowrap;
+      padding: 10px 14px;
+      font-size: 0.875rem;
+    }
+
+    .nav-icon {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .account-section {
+      padding: 16px 0 40px;
+    }
+
+    .breadcrumb {
+      font-size: 0.8rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .account-main h1 {
+      font-size: 1.25rem;
+    }
+
+    .section-description {
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+  }
+</style>

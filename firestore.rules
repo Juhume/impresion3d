@@ -1,0 +1,118 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // === HELPER FUNCTIONS ===
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    function isEmailVerified() {
+      return request.auth.token.email_verified == true;
+    }
+
+    // === USERS ===
+
+    match /users/{userId} {
+      // Usuarios pueden leer su propio perfil, admins pueden leer todos
+      allow read: if isOwner(userId) || isAdmin();
+
+      // Usuarios pueden crear su propio perfil
+      allow create: if isOwner(userId);
+
+      // Usuarios pueden actualizar su perfil (excepto role), admins pueden todo
+      allow update: if (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']))
+                    || isAdmin();
+
+      // No permitir borrado directo, solo soft delete
+      allow delete: if false;
+
+      // Direcciones del usuario
+      match /addresses/{addressId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // === PRODUCTS ===
+
+    match /products/{productId} {
+      // Lectura pública solo de productos activos y no eliminados
+      allow read: if resource.data.activo == true && resource.data.deleted == false;
+
+      // Admins pueden leer todos los productos (incluso inactivos/eliminados)
+      allow read: if isAdmin();
+
+      // Solo admins pueden escribir
+      allow write: if isAdmin();
+    }
+
+    // === CATEGORIES ===
+
+    match /categories/{categoryId} {
+      // Lectura pública de categorías activas
+      allow read: if resource.data.activo == true;
+
+      // Admins pueden leer todas y escribir
+      allow read, write: if isAdmin();
+    }
+
+    // === ORDERS ===
+
+    match /orders/{orderId} {
+      // Usuarios pueden leer sus propios pedidos, admins todos
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+
+      // Solo usuarios autenticados con email verificado pueden crear pedidos
+      // (En realidad, los pedidos se crean desde Cloud Functions)
+      allow create: if isAuthenticated() && isEmailVerified();
+
+      // Solo admins pueden actualizar pedidos
+      allow update: if isAdmin();
+
+      // No permitir borrado
+      allow delete: if false;
+
+      // Items del pedido
+      match /items/{itemId} {
+        allow read: if isOwner(get(/databases/$(database)/documents/orders/$(orderId)).data.userId)
+                    || isAdmin();
+        // Los items se crean desde Cloud Functions
+        allow write: if false;
+      }
+    }
+
+    // === CARTS ===
+
+    match /carts/{userId} {
+      // Solo el dueño puede acceder a su carrito
+      allow read, write: if isOwner(userId);
+    }
+
+    // === CONFIG ===
+
+    match /config/{document} {
+      // Lectura pública de configuración
+      allow read: if true;
+
+      // Solo admins pueden modificar
+      allow write: if isAdmin();
+    }
+
+    // === COUNTERS (solo Cloud Functions) ===
+
+    match /counters/{document} {
+      // Solo accesible desde Cloud Functions (admin SDK)
+      allow read, write: if false;
+    }
+  }
+}

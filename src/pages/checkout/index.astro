@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CheckoutFlow from '../../components/react/CheckoutFlow';
+import AuthProvider from '../../components/react/AuthProvider';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Checkout" description="Finaliza tu compra">
+  <section class="checkout-section">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Navegación">
+        <a href={base}>Inicio</a>
+        <span class="separator" aria-hidden="true"></span>
+        <span class="current">Checkout</span>
+      </nav>
+
+      <h1 class="checkout-title">Finalizar compra</h1>
+
+      <AuthProvider client:load />
+      <CheckoutFlow client:load baseUrl={base} />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .checkout-section {
+    padding: 24px 0 60px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb a {
+    color: #666;
+    transition: color 0.15s ease;
+  }
+
+  .breadcrumb a:hover {
+    color: #2563eb;
+  }
+
+  .breadcrumb .separator {
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .breadcrumb .current {
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .checkout-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 24px 0;
+  }
+
+  @media (max-width: 480px) {
+    .checkout-section {
+      padding: 16px 0 40px;
+    }
+
+    .breadcrumb {
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .checkout-title {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+    }
+  }
+</style>

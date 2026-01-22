@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RegisterForm from '../../components/react/RegisterForm';
+import AuthProvider from '../../components/react/AuthProvider';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Crear cuenta" description="Regístrate para empezar a comprar">
+  <section class="auth-page">
+    <div class="container">
+      <div class="auth-card">
+        <AuthProvider client:load>
+          <RegisterForm
+            client:load
+            onSwitchToLogin={() => window.location.href = `${base}auth/login/`}
+            onSuccess={() => window.location.href = `${base}auth/verificar/`}
+          />
+        </AuthProvider>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .auth-page {
+    padding: 60px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .auth-card {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  @media (max-width: 480px) {
+    .auth-page {
+      padding: 40px 0;
+    }
+
+    .auth-card {
+      padding: 24px;
+      margin: 0 16px;
+    }
+  }
+</style>

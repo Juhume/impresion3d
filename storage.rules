@@ -1,0 +1,18 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Imágenes de productos - lectura pública, escritura solo admin
+    match /products/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null &&
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    // Avatares de usuarios - cada usuario solo puede modificar el suyo
+    match /users/{userId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

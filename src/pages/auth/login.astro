@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LoginForm from '../../components/react/LoginForm';
+import AuthProvider from '../../components/react/AuthProvider';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Iniciar sesión" description="Accede a tu cuenta">
+  <section class="auth-page">
+    <div class="container">
+      <div class="auth-card">
+        <AuthProvider client:load>
+          <LoginForm
+            client:load
+            onSwitchToRegister={() => window.location.href = `${base}auth/registro/`}
+            onSwitchToReset={() => window.location.href = `${base}auth/recuperar/`}
+            onSuccess={() => window.location.href = base}
+          />
+        </AuthProvider>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .auth-page {
+    padding: 60px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .auth-card {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  @media (max-width: 480px) {
+    .auth-page {
+      padding: 40px 0;
+    }
+
+    .auth-card {
+      padding: 24px;
+      margin: 0 16px;
+    }
+  }
+</style>
+
+<script define:vars={{ base }}>
+  // Redirigir si ya está autenticado
+  const checkAuth = () => {
+    // La verificación real se hace en el componente React
+    // Este script es un fallback básico
+  };
+</script>

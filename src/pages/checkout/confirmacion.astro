@@ -1,0 +1,206 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Pedido confirmado" description="Tu pedido ha sido procesado">
+  <section class="confirmation-section">
+    <div class="container">
+      <div class="confirmation-card">
+        <div class="confirmation-icon">✓</div>
+        <h1>¡Gracias por tu pedido!</h1>
+        <p class="confirmation-message">
+          Tu pago ha sido procesado correctamente. Recibirás un email con
+          los detalles de tu pedido y el número de seguimiento cuando lo enviemos.
+        </p>
+
+        <div class="confirmation-info">
+          <div class="info-item">
+            <span class="info-label">Estado</span>
+            <span class="info-value status-paid">Pagado</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Próximo paso</span>
+            <span class="info-value">Preparando tu pedido</span>
+          </div>
+        </div>
+
+        <div class="confirmation-actions">
+          <a href={`${base}cuenta/pedidos/`} class="btn btn-primary">
+            Ver mis pedidos
+          </a>
+          <a href={`${base}`} class="btn btn-secondary">
+            Volver a la tienda
+          </a>
+        </div>
+
+        <p class="confirmation-help">
+          ¿Tienes alguna pregunta?
+          <a href="https://wa.me/34693846562" target="_blank" rel="noopener noreferrer">
+            Contáctanos por WhatsApp
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .confirmation-section {
+    padding: 60px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .confirmation-card {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 48px 32px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .confirmation-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #22c55e;
+    color: white;
+    font-size: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 16px 0;
+  }
+
+  .confirmation-message {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 0 32px 0;
+  }
+
+  .confirmation-info {
+    background-color: #f9fafb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .info-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+
+  .info-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .status-paid {
+    background-color: #dcfce7;
+    color: #16a34a;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+
+  .confirmation-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-primary {
+    background: #2563eb;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #1d4ed8;
+  }
+
+  .btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  .btn-secondary:hover {
+    background: #e5e7eb;
+  }
+
+  .confirmation-help {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .confirmation-help a {
+    color: #2563eb;
+    font-weight: 500;
+  }
+
+  .confirmation-help a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    .confirmation-section {
+      padding: 32px 0;
+    }
+
+    .confirmation-card {
+      padding: 32px 20px;
+      border-radius: 16px;
+    }
+
+    .confirmation-icon {
+      width: 64px;
+      height: 64px;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+    }
+
+    .confirmation-message {
+      font-size: 0.95rem;
+    }
+  }
+</style>
