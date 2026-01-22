@@ -235,7 +235,7 @@ export default function ProductDetail({ baseUrl }: ProductDetailProps) {
           {/* WhatsApp CTA */}
           <div className="product-actions">
             <a
-              href={`https://wa.me/34600000000?text=Hola! Me interesa el producto: ${product.nombre} (Ref: ${numRef})`}
+              href={`https://wa.me/34693846562?text=Hola! Me interesa el producto: ${product.nombre} (Ref: ${numRef})`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary whatsapp-btn"

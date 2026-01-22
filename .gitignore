@@ -16,12 +16,21 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.example
 
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
+# IDE / editor settings
 .idea/
+.vscode/
+.prettierrc
+
+# Claude Code
+.claude/
+
+# Firebase Functions compiled output
+firebase/functions/lib/
 
 # Screenshots for debugging
 imagenesClaude/
