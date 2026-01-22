@@ -282,15 +282,11 @@
   margin-bottom: 24px;
 }
 
-.video-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.video-link svg {
-  width: 18px;
-  height: 18px;
+.product-video {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
 }
 
 /* WhatsApp Button */

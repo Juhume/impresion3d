@@ -218,17 +218,14 @@ export default function ProductDetail({ baseUrl }: ProductDetailProps) {
           {/* Video */}
           {product.video && (
             <div className="product-video-section">
-              <a
-                href={product.video}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary video-link"
+              <video
+                src={getStorageUrl(product.video)}
+                controls
+                preload="metadata"
+                className="product-video"
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-                Ver vídeo del producto
-              </a>
+                Tu navegador no soporta vídeos.
+              </video>
             </div>
           )}
 
