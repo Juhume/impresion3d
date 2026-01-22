@@ -29,12 +29,12 @@ export default function CartItem({ item, baseUrl }: Props) {
 
   return (
     <div className="cart-item">
-      <a href={`${baseUrl}producto/${item.slug}/`} className="cart-item-image">
+      <a href={`${baseUrl}producto/?slug=${item.slug}`} className="cart-item-image">
         <img src={imageUrl} alt={item.nombre} />
       </a>
 
       <div className="cart-item-info">
-        <a href={`${baseUrl}producto/${item.slug}/`} className="cart-item-name">
+        <a href={`${baseUrl}producto/?slug=${item.slug}`} className="cart-item-name">
           {item.nombre}
         </a>
         <div className="cart-item-price">{formatPrice(item.precio)}</div>

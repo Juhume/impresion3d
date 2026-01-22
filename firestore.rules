@@ -46,11 +46,8 @@ service cloud.firestore {
     // === PRODUCTS ===
 
     match /products/{productId} {
-      // Lectura pública solo de productos activos y no eliminados
-      allow read: if resource.data.activo == true && resource.data.deleted == false;
-
-      // Admins pueden leer todos los productos (incluso inactivos/eliminados)
-      allow read: if isAdmin();
+      // Lectura pública de productos (filtrado activo/deleted se hace en la app)
+      allow read: if true;
 
       // Solo admins pueden escribir
       allow write: if isAdmin();
@@ -59,11 +56,11 @@ service cloud.firestore {
     // === CATEGORIES ===
 
     match /categories/{categoryId} {
-      // Lectura pública de categorías activas
-      allow read: if resource.data.activo == true;
+      // Lectura pública de categorías
+      allow read: if true;
 
-      // Admins pueden leer todas y escribir
-      allow read, write: if isAdmin();
+      // Solo admins pueden escribir
+      allow write: if isAdmin();
     }
 
     // === ORDERS ===

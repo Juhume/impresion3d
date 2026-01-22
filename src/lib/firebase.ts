@@ -55,3 +55,10 @@ export function isFirebaseConfigured(): boolean {
     firebaseConfig.authDomain
   );
 }
+
+// Convertir un path relativo de imagen a URL completa
+export function getStorageUrl(path: string): string {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  return `https://zona-figura.web.app/${path}`;
+}
