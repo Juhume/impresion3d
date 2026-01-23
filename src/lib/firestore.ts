@@ -544,13 +544,15 @@ export function mergeCartItems(localItems: CartItem[], remoteItems: CartItem[]):
     merged.set(item.productId, { ...item });
   }
 
-  // Luego combinar con items locales (sumar cantidades si existe)
+  // Luego combinar con items locales (sumar cantidades si existe, respetando stock)
   for (const item of localItems) {
     const existing = merged.get(item.productId);
     if (existing) {
+      const maxQuantity = item.stock || existing.stock || 99;
       merged.set(item.productId, {
         ...existing,
-        cantidad: existing.cantidad + item.cantidad,
+        cantidad: Math.min(existing.cantidad + item.cantidad, maxQuantity),
+        stock: item.stock || existing.stock,
       });
     } else {
       merged.set(item.productId, { ...item });

@@ -51,23 +51,25 @@ export const useCartStore = create<CartState>()(
           );
 
           let newItems: CartItem[];
+          const maxQuantity = item.stock || MAX_CART_ITEM_QUANTITY;
 
           if (existingIndex >= 0) {
-            // Producto ya existe, aumentar cantidad (con límite máximo)
+            // Producto ya existe, aumentar cantidad (limitado por stock)
             newItems = [...state.items];
             const newQuantity = Math.min(
               newItems[existingIndex].cantidad + item.cantidad,
-              MAX_CART_ITEM_QUANTITY
+              maxQuantity
             );
             newItems[existingIndex] = {
               ...newItems[existingIndex],
               cantidad: newQuantity,
+              stock: item.stock, // Actualizar stock por si cambió
             };
           } else {
             // Producto nuevo
             newItems = [
               ...state.items,
-              { ...item, cantidad: Math.min(item.cantidad, MAX_CART_ITEM_QUANTITY), addedAt: new Date() },
+              { ...item, cantidad: Math.min(item.cantidad, maxQuantity), addedAt: new Date() },
             ];
           }
 
@@ -100,9 +102,11 @@ export const useCartStore = create<CartState>()(
         }
 
         set((state) => ({
-          items: state.items.map((item) =>
-            item.productId === productId ? { ...item, cantidad } : item
-          ),
+          items: state.items.map((item) => {
+            if (item.productId !== productId) return item;
+            const maxQuantity = item.stock || MAX_CART_ITEM_QUANTITY;
+            return { ...item, cantidad: Math.min(cantidad, maxQuantity) };
+          }),
         }));
 
         // Guardar en Firestore si el usuario está logueado

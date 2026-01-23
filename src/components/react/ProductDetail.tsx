@@ -238,6 +238,7 @@ export default function ProductDetail({ baseUrl }: ProductDetailProps) {
               precio={precio}
               imagen={product.imagen || ''}
               slug={slugify(product.nombre)}
+              stock={product.stock || 0}
             />
 
             <a

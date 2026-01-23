@@ -18,7 +18,10 @@ export default function CartItem({ item, baseUrl }: Props) {
     }
   };
 
+  const isMaxStock = item.stock > 0 && item.cantidad >= item.stock;
+
   const handleIncrease = () => {
+    if (isMaxStock) return;
     updateQuantity(item.productId, item.cantidad + 1);
   };
 
@@ -51,8 +54,9 @@ export default function CartItem({ item, baseUrl }: Props) {
             <span className="quantity-value">{item.cantidad}</span>
             <button
               onClick={handleIncrease}
-              className="quantity-btn"
+              className={`quantity-btn ${isMaxStock ? 'quantity-btn-disabled' : ''}`}
               aria-label="Aumentar cantidad"
+              disabled={isMaxStock}
             >
               +
             </button>
@@ -161,8 +165,13 @@ export default function CartItem({ item, baseUrl }: Props) {
           transition: background 0.15s ease;
         }
 
-        .quantity-btn:hover {
+        .quantity-btn:hover:not(:disabled) {
           background: var(--color-surface-hover);
+        }
+
+        .quantity-btn-disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
         }
 
         .quantity-value {

@@ -313,6 +313,11 @@
   border-color: var(--color-success, #22c55e);
 }
 
+.add-to-cart-btn.disabled-stock {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* WhatsApp Button */
 .whatsapp-btn {
   display: inline-flex;
