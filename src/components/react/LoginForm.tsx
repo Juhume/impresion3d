@@ -133,20 +133,21 @@ export default function LoginForm({ onSwitchToRegister, onSwitchToReset, onSucce
           font-weight: 700;
           margin: 0 0 8px;
           text-align: center;
+          color: var(--color-text);
         }
 
         .auth-subtitle {
-          color: #666;
+          color: var(--color-text-muted);
           text-align: center;
           margin-bottom: 24px;
         }
 
         .auth-error {
-          background: #fef2f2;
-          border: 1px solid #fecaca;
-          color: #dc2626;
+          background: rgba(239, 68, 68, 0.1);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          color: var(--color-error-light);
           padding: 12px 16px;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           margin-bottom: 16px;
           font-size: 0.9rem;
         }
@@ -160,33 +161,37 @@ export default function LoginForm({ onSwitchToRegister, onSwitchToReset, onSucce
           font-size: 0.9rem;
           font-weight: 500;
           margin-bottom: 6px;
-          color: #374151;
+          color: var(--color-text-secondary);
         }
 
         .form-group input {
           width: 100%;
           padding: 12px 16px;
-          border: 1px solid #e5e5e5;
-          border-radius: 8px;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-sm);
           font-size: 1rem;
-          transition: border-color 0.15s ease;
+          background: var(--color-surface);
+          color: var(--color-text);
+          transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
 
         .form-group input:focus {
           outline: none;
-          border-color: #2563eb;
+          border-color: var(--color-accent);
+          box-shadow: 0 0 0 3px var(--color-accent-glow);
         }
 
         .form-group input:disabled {
-          background: #f5f5f5;
+          background: var(--color-surface);
           cursor: not-allowed;
+          opacity: 0.6;
         }
 
         .btn {
           width: 100%;
           padding: 14px 24px;
           border: none;
-          border-radius: 10px;
+          border-radius: var(--radius-md);
           font-size: 1rem;
           font-weight: 600;
           cursor: pointer;
@@ -198,27 +203,30 @@ export default function LoginForm({ onSwitchToRegister, onSwitchToReset, onSucce
         }
 
         .btn:disabled {
-          opacity: 0.6;
+          background: var(--color-text-muted);
+          box-shadow: none;
           cursor: not-allowed;
         }
 
         .btn-primary {
-          background: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .btn-primary:hover:not(:disabled) {
-          background: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         .btn-google {
-          background: white;
-          color: #374151;
-          border: 1px solid #e5e5e5;
+          background: var(--color-surface);
+          color: var(--color-text);
+          border: 1px solid var(--color-border);
         }
 
         .btn-google:hover:not(:disabled) {
-          background: #f9fafb;
+          background: var(--color-bg-elevated);
         }
 
         .auth-divider {
@@ -226,7 +234,7 @@ export default function LoginForm({ onSwitchToRegister, onSwitchToReset, onSucce
           align-items: center;
           gap: 16px;
           margin: 20px 0;
-          color: #9ca3af;
+          color: var(--color-text-muted);
           font-size: 0.85rem;
         }
 
@@ -235,20 +243,20 @@ export default function LoginForm({ onSwitchToRegister, onSwitchToReset, onSucce
           content: '';
           flex: 1;
           height: 1px;
-          background: #e5e5e5;
+          background: var(--color-border);
         }
 
         .auth-links {
           margin-top: 24px;
           text-align: center;
           font-size: 0.9rem;
-          color: #666;
+          color: var(--color-text-muted);
         }
 
         .link-btn {
           background: none;
           border: none;
-          color: #2563eb;
+          color: var(--color-accent);
           font-weight: 500;
           cursor: pointer;
           padding: 0;

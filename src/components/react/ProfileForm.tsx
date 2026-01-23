@@ -174,13 +174,14 @@ export default function ProfileForm() {
         .profile-login-required {
           text-align: center;
           padding: 48px 24px;
+          color: var(--color-text-secondary);
         }
 
         .spinner {
           width: 32px;
           height: 32px;
-          border: 3px solid #e5e5e5;
-          border-top-color: #2563eb;
+          border: 3px solid var(--color-border);
+          border-top-color: var(--color-accent);
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
           margin: 0 auto 16px;
@@ -211,74 +212,80 @@ export default function ProfileForm() {
         .form-group label {
           font-size: 0.875rem;
           font-weight: 500;
-          color: #374151;
+          color: var(--color-text-secondary);
         }
 
         .form-group input {
           padding: 12px 14px;
-          border: 1px solid #d1d5db;
-          border-radius: 8px;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-sm);
           font-size: 1rem;
+          background: var(--color-surface);
+          color: var(--color-text);
           transition: border-color 0.15s, box-shadow 0.15s;
         }
 
         .form-group input:focus {
           outline: none;
-          border-color: #2563eb;
-          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+          border-color: var(--color-accent);
+          box-shadow: 0 0 0 3px var(--color-accent-glow);
         }
 
         .form-group input.input-disabled {
-          background-color: #f3f4f6;
-          color: #6b7280;
+          background-color: var(--color-bg-subtle);
+          color: var(--color-text-muted);
           cursor: not-allowed;
         }
 
         .input-hint {
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
         }
 
         .form-error {
           padding: 12px;
-          background-color: #fef2f2;
-          border: 1px solid #fecaca;
-          border-radius: 8px;
-          color: #dc2626;
+          background-color: rgba(239, 68, 68, 0.1);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          border-radius: var(--radius-sm);
+          color: var(--color-error-light);
           font-size: 0.875rem;
         }
 
         .form-success {
           padding: 12px;
-          background-color: #f0fdf4;
-          border: 1px solid #bbf7d0;
-          border-radius: 8px;
-          color: #16a34a;
+          background-color: rgba(16, 185, 129, 0.1);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          border-radius: var(--radius-sm);
+          color: var(--color-success-light);
           font-size: 0.875rem;
         }
 
         .btn-primary {
           display: inline-block;
           padding: 12px 24px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 1rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
           text-align: center;
           text-decoration: none;
-          transition: background-color 0.15s;
+          transition: all var(--transition-fast);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .btn-primary:hover {
-          background-color: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         .btn-primary:disabled {
-          background-color: #9ca3af;
+          background: var(--color-text-muted);
+          box-shadow: none;
           cursor: not-allowed;
+          transform: none;
         }
 
         @media (max-width: 480px) {

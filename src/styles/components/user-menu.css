@@ -14,7 +14,7 @@
 .avatar-placeholder {
   width: 36px;
   height: 36px;
-  background: #e5e5e5;
+  background: var(--color-border);
   border-radius: 50%;
   animation: pulse 1.5s infinite;
 }
@@ -33,19 +33,19 @@
   cursor: pointer;
   padding: 4px;
   border-radius: 24px;
-  transition: background 0.15s ease;
+  transition: background var(--transition-fast);
 }
 
 .user-menu-trigger:hover {
-  background: #f3f4f6;
+  background: var(--color-surface);
 }
 
 .avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #2563eb;
-  color: white;
+  background: var(--gradient-primary);
+  color: var(--color-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,8 +61,8 @@
 }
 
 .chevron {
-  color: #666;
-  transition: transform 0.15s ease;
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
 }
 
 .chevron.open {
@@ -74,10 +74,10 @@
   top: calc(100% + 8px);
   right: 0;
   width: 240px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-  border: 1px solid #e5e5e5;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
   padding: 8px 0;
   z-index: 1000;
 }
@@ -89,13 +89,13 @@
 .user-name {
   display: block;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-text);
   font-size: 0.95rem;
 }
 
 .user-email {
   display: block;
-  color: #666;
+  color: var(--color-text-muted);
   font-size: 0.8rem;
   margin-top: 2px;
   overflow: hidden;
@@ -104,7 +104,7 @@
 
 .menu-divider {
   height: 1px;
-  background: #e5e5e5;
+  background: var(--color-border);
   margin: 8px 0;
 }
 
@@ -113,10 +113,10 @@
   align-items: center;
   gap: 12px;
   padding: 10px 16px;
-  color: #374151;
+  color: var(--color-text-secondary);
   text-decoration: none;
   font-size: 0.9rem;
-  transition: background 0.1s ease;
+  transition: background var(--transition-fast);
   width: 100%;
   border: none;
   background: none;
@@ -125,27 +125,27 @@
 }
 
 .menu-item:hover {
-  background: #f3f4f6;
+  background: var(--color-surface);
 }
 
 .menu-item svg {
-  color: #6b7280;
+  color: var(--color-text-muted);
 }
 
 .menu-item-admin {
-  color: #2563eb;
+  color: var(--color-accent);
 }
 
 .menu-item-admin svg {
-  color: #2563eb;
+  color: var(--color-accent);
 }
 
 .menu-item-logout {
-  color: #dc2626;
+  color: var(--color-error);
 }
 
 .menu-item-logout svg {
-  color: #dc2626;
+  color: var(--color-error);
 }
 
 /* Login button */
@@ -154,15 +154,17 @@
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
-  background: #2563eb;
-  color: white;
-  border-radius: 8px;
+  background: var(--gradient-primary);
+  color: var(--color-bg);
+  border-radius: var(--radius-sm);
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
-  transition: background 0.15s ease;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-glow-sm);
 }
 
 .login-btn:hover {
-  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }

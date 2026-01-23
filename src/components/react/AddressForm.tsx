@@ -261,7 +261,7 @@ export default function AddressForm({ address, onSave, onCancel, isFirst = false
         .address-form-overlay {
           position: fixed;
           inset: 0;
-          background-color: rgba(0, 0, 0, 0.5);
+          background-color: rgba(0, 0, 0, 0.7);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -270,7 +270,7 @@ export default function AddressForm({ address, onSave, onCancel, isFirst = false
         }
 
         .address-form-modal {
-          background: white;
+          background: var(--color-bg-elevated);
           border-radius: 16px;
           width: 100%;
           max-width: 480px;
@@ -283,30 +283,30 @@ export default function AddressForm({ address, onSave, onCancel, isFirst = false
           justify-content: space-between;
           align-items: center;
           padding: 20px 24px;
-          border-bottom: 1px solid #e5e5e5;
+          border-bottom: 1px solid var(--color-border);
         }
 
         .modal-header h3 {
           font-size: 1.125rem;
           font-weight: 600;
           margin: 0;
-          color: #111827;
+          color: var(--color-text);
         }
 
         .close-btn {
           width: 32px;
           height: 32px;
           border: none;
-          background: #f3f4f6;
-          border-radius: 8px;
+          background: var(--color-surface);
+          border-radius: var(--radius-sm);
           font-size: 1rem;
           cursor: pointer;
-          color: #6b7280;
+          color: var(--color-text-muted);
           transition: background-color 0.15s;
         }
 
         .close-btn:hover {
-          background-color: #e5e7eb;
+          background-color: var(--color-border);
         }
 
         .address-form {
@@ -339,23 +339,25 @@ export default function AddressForm({ address, onSave, onCancel, isFirst = false
         .form-group label {
           font-size: 0.875rem;
           font-weight: 500;
-          color: #374151;
+          color: var(--color-text-secondary);
         }
 
         .form-group input,
         .form-group select {
           padding: 10px 12px;
-          border: 1px solid #d1d5db;
-          border-radius: 8px;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-sm);
           font-size: 0.95rem;
+          background: var(--color-surface);
+          color: var(--color-text);
           transition: border-color 0.15s, box-shadow 0.15s;
         }
 
         .form-group input:focus,
         .form-group select:focus {
           outline: none;
-          border-color: #2563eb;
-          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+          border-color: var(--color-accent);
+          box-shadow: 0 0 0 3px var(--color-accent-glow);
         }
 
         .checkbox-group {
@@ -368,6 +370,7 @@ export default function AddressForm({ address, onSave, onCancel, isFirst = false
           gap: 10px;
           cursor: pointer;
           font-weight: 400;
+          color: var(--color-text);
         }
 
         .checkbox-label input {
@@ -378,10 +381,10 @@ export default function AddressForm({ address, onSave, onCancel, isFirst = false
 
         .form-error {
           padding: 12px;
-          background-color: #fef2f2;
-          border: 1px solid #fecaca;
-          border-radius: 8px;
-          color: #dc2626;
+          background-color: var(--color-error-light);
+          border: 1px solid var(--color-error);
+          border-radius: var(--radius-sm);
+          color: var(--color-error);
           font-size: 0.875rem;
         }
 
@@ -398,32 +401,36 @@ export default function AddressForm({ address, onSave, onCancel, isFirst = false
           font-size: 0.95rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: background-color 0.15s;
+          transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
         }
 
         .btn-primary {
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .btn-primary:hover {
-          background-color: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         .btn-primary:disabled {
-          background-color: #9ca3af;
+          background: var(--color-text-muted);
           cursor: not-allowed;
+          box-shadow: none;
+          transform: none;
         }
 
         .btn-secondary {
-          background-color: #f3f4f6;
-          color: #374151;
+          background-color: var(--color-surface);
+          color: var(--color-text-secondary);
         }
 
         .btn-secondary:hover {
-          background-color: #e5e7eb;
+          background-color: var(--color-border);
         }
 
         @media (max-width: 480px) {

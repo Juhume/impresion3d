@@ -282,8 +282,8 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         .spinner {
           width: 32px;
           height: 32px;
-          border: 3px solid #e5e5e5;
-          border-top-color: #2563eb;
+          border: 3px solid var(--color-border);
+          border-top-color: var(--color-accent);
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
           margin: 0 auto 16px;
@@ -297,9 +297,9 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
           max-width: 400px;
           margin: 0 auto;
           padding: 32px;
-          background-color: white;
-          border-radius: 16px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          background-color: var(--color-bg-elevated);
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-lg);
         }
 
         .login-card h2 {
@@ -308,7 +308,7 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         }
 
         .login-card p {
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 0 0 24px 0;
         }
 
@@ -326,15 +326,15 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
 
         .checkout-empty p,
         .checkout-confirmation p {
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 0 0 24px 0;
         }
 
         .confirmation-icon {
           width: 64px;
           height: 64px;
-          background-color: #22c55e;
-          color: white;
+          background-color: var(--color-success);
+          color: var(--color-bg);
           font-size: 2rem;
           border-radius: 50%;
           display: flex;
@@ -365,8 +365,8 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         .step-number {
           width: 32px;
           height: 32px;
-          background-color: #e5e5e5;
-          color: #9ca3af;
+          background-color: var(--color-border);
+          color: var(--color-text-muted);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -376,29 +376,29 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         }
 
         .step.active .step-number {
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
         }
 
         .step.completed .step-number {
-          background-color: #22c55e;
-          color: white;
+          background-color: var(--color-success);
+          color: var(--color-bg);
         }
 
         .step-label {
           font-size: 0.9rem;
           font-weight: 500;
-          color: #6b7280;
+          color: var(--color-text-muted);
         }
 
         .step.active .step-label {
-          color: #111827;
+          color: var(--color-text);
         }
 
         .step-connector {
           width: 64px;
           height: 2px;
-          background-color: #e5e5e5;
+          background-color: var(--color-border);
           margin: 0 16px;
         }
 
@@ -410,10 +410,10 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         }
 
         .checkout-main {
-          background-color: white;
-          border-radius: 16px;
+          background-color: var(--color-bg-elevated);
+          border-radius: var(--radius-lg);
           padding: 24px;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: var(--shadow-md);
         }
 
         .address-step,
@@ -425,37 +425,41 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
 
         .checkout-error {
           padding: 12px;
-          background-color: #fef2f2;
-          border: 1px solid #fecaca;
-          border-radius: 8px;
-          color: #dc2626;
+          background-color: rgba(239, 68, 68, 0.1);
+          border: 1px solid var(--color-error);
+          border-radius: var(--radius-sm);
+          color: var(--color-error-light);
           font-size: 0.875rem;
         }
 
         .btn-continue {
           padding: 14px 24px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 1rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: background-color 0.15s;
+          transition: all var(--transition-fast);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .btn-continue:hover:not(:disabled) {
-          background-color: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         .btn-continue:disabled {
-          background-color: #9ca3af;
+          background: var(--color-border);
+          color: var(--color-text-muted);
           cursor: not-allowed;
+          box-shadow: none;
         }
 
         .selected-address-summary {
-          background-color: #f9fafb;
-          border-radius: 8px;
+          background-color: var(--color-surface);
+          border-radius: var(--radius-sm);
           padding: 16px;
           position: relative;
         }
@@ -463,13 +467,13 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         .selected-address-summary h4 {
           font-size: 0.85rem;
           font-weight: 600;
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 0 0 6px 0;
         }
 
         .selected-address-summary p {
           margin: 0;
-          color: #374151;
+          color: var(--color-text-secondary);
           font-size: 0.9rem;
         }
 
@@ -479,11 +483,11 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
           right: 12px;
           padding: 4px 10px;
           background: none;
-          border: 1px solid #2563eb;
-          color: #2563eb;
+          border: 1px solid var(--color-accent);
+          color: var(--color-accent);
           font-size: 0.75rem;
           font-weight: 500;
-          border-radius: 4px;
+          border-radius: var(--radius-xs);
           cursor: pointer;
         }
 
@@ -493,17 +497,17 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         }
 
         .order-summary {
-          background-color: white;
-          border-radius: 16px;
+          background-color: var(--color-bg-elevated);
+          border-radius: var(--radius-lg);
           padding: 24px;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: var(--shadow-md);
         }
 
         .order-summary h3 {
           font-size: 1.1rem;
           font-weight: 600;
           margin: 0 0 20px 0;
-          color: #111827;
+          color: var(--color-text);
         }
 
         .summary-items {
@@ -511,7 +515,7 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
           flex-direction: column;
           gap: 12px;
           padding-bottom: 16px;
-          border-bottom: 1px solid #e5e5e5;
+          border-bottom: 1px solid var(--color-border);
           margin-bottom: 16px;
         }
 
@@ -522,16 +526,16 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         }
 
         .item-name {
-          color: #374151;
+          color: var(--color-text-secondary);
         }
 
         .item-qty {
-          color: #9ca3af;
+          color: var(--color-text-muted);
         }
 
         .item-price {
           font-weight: 500;
-          color: #111827;
+          color: var(--color-text);
         }
 
         .summary-totals {
@@ -544,26 +548,26 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
           display: flex;
           justify-content: space-between;
           font-size: 0.9rem;
-          color: #4b5563;
+          color: var(--color-text-secondary);
         }
 
         .total-row.final {
           padding-top: 12px;
           margin-top: 4px;
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid var(--color-border);
           font-size: 1.1rem;
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
         }
 
         .free-shipping {
-          color: #22c55e;
+          color: var(--color-success);
           font-weight: 500;
         }
 
         .shipping-hint {
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
           text-align: right;
           margin-top: 4px;
         }
@@ -571,37 +575,39 @@ export default function CheckoutFlow({ baseUrl = import.meta.env.BASE_URL }: Pro
         .btn-primary {
           display: inline-block;
           padding: 12px 24px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 0.95rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
           text-decoration: none;
-          transition: background-color 0.15s;
+          transition: all var(--transition-fast);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .btn-primary:hover {
-          background-color: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         .btn-secondary {
           display: inline-block;
           padding: 12px 24px;
-          background-color: #f3f4f6;
-          color: #374151;
+          background-color: var(--color-surface);
+          color: var(--color-text-secondary);
           font-size: 0.95rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
           text-decoration: none;
-          transition: background-color 0.15s;
+          transition: all var(--transition-fast);
         }
 
         .btn-secondary:hover {
-          background-color: #e5e7eb;
+          background-color: var(--color-surface-hover);
         }
 
         @media (max-width: 900px) {

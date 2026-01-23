@@ -222,8 +222,8 @@ export default function AddressList() {
         .spinner {
           width: 32px;
           height: 32px;
-          border: 3px solid #e5e5e5;
-          border-top-color: #2563eb;
+          border: 3px solid var(--color-border);
+          border-top-color: var(--color-accent);
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
           margin: 0 auto 16px;
@@ -243,32 +243,34 @@ export default function AddressList() {
         .addresses-header h2 {
           font-size: 1.25rem;
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
           margin: 0;
         }
 
         .btn-add {
           padding: 10px 16px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 0.875rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: background-color 0.15s;
+          box-shadow: var(--shadow-glow-sm);
+          transition: transform 0.15s, box-shadow 0.15s;
         }
 
         .btn-add:hover {
-          background-color: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         .addresses-empty {
           text-align: center;
           padding: 48px 24px;
-          background-color: #f9fafb;
-          border-radius: 12px;
-          border: 1px dashed #d1d5db;
+          background-color: var(--color-surface);
+          border-radius: var(--radius-md);
+          border: 1px dashed var(--color-border);
         }
 
         .empty-icon {
@@ -277,7 +279,7 @@ export default function AddressList() {
         }
 
         .addresses-empty p {
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 0 0 20px 0;
         }
 
@@ -289,20 +291,20 @@ export default function AddressList() {
 
         .address-card {
           position: relative;
-          background-color: white;
-          border: 1px solid #e5e5e5;
-          border-radius: 12px;
+          background-color: var(--color-bg-elevated);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
           padding: 20px;
           transition: border-color 0.15s;
         }
 
         .address-card:hover {
-          border-color: #2563eb;
+          border-color: var(--color-accent);
         }
 
         .address-card.is-default {
-          border-color: #2563eb;
-          background-color: #f0f5ff;
+          border-color: var(--color-accent);
+          background-color: var(--color-accent-glow);
         }
 
         .default-badge {
@@ -310,8 +312,8 @@ export default function AddressList() {
           top: 12px;
           right: 12px;
           padding: 4px 8px;
-          background-color: #2563eb;
-          color: white;
+          background-color: var(--color-accent);
+          color: var(--color-bg);
           font-size: 0.7rem;
           font-weight: 600;
           border-radius: 4px;
@@ -321,7 +323,7 @@ export default function AddressList() {
         .address-alias {
           font-size: 1rem;
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
           margin: 0 0 8px 0;
         }
 
@@ -330,14 +332,14 @@ export default function AddressList() {
         .address-province,
         .address-phone {
           font-size: 0.875rem;
-          color: #4b5563;
+          color: var(--color-text-secondary);
           margin: 0;
           line-height: 1.5;
         }
 
         .address-phone {
           margin-top: 8px;
-          color: #6b7280;
+          color: var(--color-text-muted);
         }
 
         .address-actions {
@@ -346,14 +348,14 @@ export default function AddressList() {
           align-items: center;
           margin-top: 16px;
           padding-top: 16px;
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid var(--color-border);
         }
 
         .btn-text {
           padding: 0;
           background: none;
           border: none;
-          color: #2563eb;
+          color: var(--color-accent);
           font-size: 0.8rem;
           font-weight: 500;
           cursor: pointer;
@@ -374,19 +376,19 @@ export default function AddressList() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: #f3f4f6;
+          background-color: var(--color-surface);
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
           transition: background-color 0.15s;
         }
 
         .btn-icon:hover {
-          background-color: #e5e7eb;
+          background-color: var(--color-border);
         }
 
         .btn-icon.btn-danger:hover {
-          background-color: #fef2f2;
+          background-color: var(--color-error-light);
         }
 
         .btn-icon:disabled {
@@ -397,19 +399,21 @@ export default function AddressList() {
         .btn-primary {
           display: inline-block;
           padding: 12px 24px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 0.95rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
           text-decoration: none;
-          transition: background-color 0.15s;
+          box-shadow: var(--shadow-glow-sm);
+          transition: transform 0.15s, box-shadow 0.15s;
         }
 
         .btn-primary:hover {
-          background-color: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         @media (max-width: 600px) {

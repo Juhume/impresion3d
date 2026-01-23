@@ -133,8 +133,8 @@ export default function AddressSelector({ selectedAddressId, onSelect }: Address
 
       <style>{`
         .address-selector {
-          background-color: #f9fafb;
-          border-radius: 12px;
+          background-color: var(--color-surface);
+          border-radius: var(--radius-md);
           padding: 20px;
         }
 
@@ -146,8 +146,8 @@ export default function AddressSelector({ selectedAddressId, onSelect }: Address
         .spinner {
           width: 24px;
           height: 24px;
-          border: 2px solid #e5e5e5;
-          border-top-color: #2563eb;
+          border: 2px solid var(--color-border);
+          border-top-color: var(--color-accent);
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
           margin: 0 auto 12px;
@@ -167,24 +167,24 @@ export default function AddressSelector({ selectedAddressId, onSelect }: Address
         .selector-header h3 {
           font-size: 1rem;
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
           margin: 0;
         }
 
         .btn-add-address {
           padding: 6px 12px;
           background: none;
-          border: 1px dashed #2563eb;
-          color: #2563eb;
+          border: 1px dashed var(--color-accent);
+          color: var(--color-accent);
           font-size: 0.8rem;
           font-weight: 500;
-          border-radius: 6px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: all 0.15s;
+          transition: all var(--transition-fast);
         }
 
         .btn-add-address:hover {
-          background-color: #eff6ff;
+          background-color: var(--color-accent-glow);
         }
 
         .no-addresses {
@@ -193,7 +193,7 @@ export default function AddressSelector({ selectedAddressId, onSelect }: Address
         }
 
         .no-addresses p {
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 0 0 16px 0;
         }
 
@@ -208,20 +208,20 @@ export default function AddressSelector({ selectedAddressId, onSelect }: Address
           align-items: flex-start;
           gap: 12px;
           padding: 14px;
-          background-color: white;
-          border: 1px solid #e5e5e5;
-          border-radius: 8px;
+          background-color: var(--color-bg-elevated);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: all 0.15s;
+          transition: all var(--transition-fast);
         }
 
         .address-option:hover {
-          border-color: #2563eb;
+          border-color: var(--color-accent);
         }
 
         .address-option.selected {
-          border-color: #2563eb;
-          background-color: #eff6ff;
+          border-color: var(--color-accent);
+          background-color: var(--color-accent-glow);
         }
 
         .address-option input {
@@ -237,30 +237,30 @@ export default function AddressSelector({ selectedAddressId, onSelect }: Address
 
         .address-alias {
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
           font-size: 0.9rem;
         }
 
         .address-street,
         .address-city {
           font-size: 0.85rem;
-          color: #4b5563;
+          color: var(--color-text-secondary);
         }
 
         .address-phone {
           font-size: 0.8rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin-top: 4px;
         }
 
         .default-badge {
           display: inline-block;
           padding: 2px 6px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 0.65rem;
           font-weight: 600;
-          border-radius: 4px;
+          border-radius: var(--radius-xs);
           text-transform: uppercase;
           margin-top: 6px;
           width: fit-content;
@@ -268,18 +268,20 @@ export default function AddressSelector({ selectedAddressId, onSelect }: Address
 
         .btn-primary {
           padding: 10px 20px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 0.9rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: background-color 0.15s;
+          transition: all var(--transition-fast);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .btn-primary:hover {
-          background-color: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
       `}</style>
     </div>

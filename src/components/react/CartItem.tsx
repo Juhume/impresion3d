@@ -86,15 +86,16 @@ export default function CartItem({ item, baseUrl }: Props) {
           display: flex;
           gap: 12px;
           padding: 16px 0;
-          border-bottom: 1px solid #e5e5e5;
+          border-bottom: 1px solid var(--color-border);
         }
 
         .cart-item-image {
           width: 72px;
           height: 72px;
           flex-shrink: 0;
-          background: #f5f5f5;
-          border-radius: 8px;
+          background: var(--color-surface);
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--color-border);
           overflow: hidden;
           display: flex;
           align-items: center;
@@ -114,7 +115,7 @@ export default function CartItem({ item, baseUrl }: Props) {
 
         .cart-item-name {
           font-weight: 500;
-          color: #1a1a1a;
+          color: var(--color-text);
           text-decoration: none;
           display: block;
           margin-bottom: 4px;
@@ -122,11 +123,11 @@ export default function CartItem({ item, baseUrl }: Props) {
         }
 
         .cart-item-name:hover {
-          color: #2563eb;
+          color: var(--color-accent-light);
         }
 
         .cart-item-price {
-          color: #666;
+          color: var(--color-text-muted);
           font-size: 0.85rem;
           margin-bottom: 8px;
         }
@@ -141,8 +142,8 @@ export default function CartItem({ item, baseUrl }: Props) {
           display: flex;
           align-items: center;
           gap: 0;
-          border: 1px solid #e5e5e5;
-          border-radius: 6px;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-sm);
           overflow: hidden;
         }
 
@@ -152,16 +153,16 @@ export default function CartItem({ item, baseUrl }: Props) {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #f9fafb;
+          background: var(--color-surface);
           border: none;
           cursor: pointer;
           font-size: 1rem;
-          color: #1a1a1a;
+          color: var(--color-text);
           transition: background 0.15s ease;
         }
 
         .quantity-btn:hover {
-          background: #e5e5e5;
+          background: var(--color-surface-hover);
         }
 
         .quantity-value {
@@ -169,6 +170,7 @@ export default function CartItem({ item, baseUrl }: Props) {
           text-align: center;
           font-size: 0.9rem;
           font-weight: 500;
+          color: var(--color-text);
         }
 
         .remove-btn {
@@ -176,7 +178,7 @@ export default function CartItem({ item, baseUrl }: Props) {
           border: none;
           cursor: pointer;
           padding: 4px;
-          color: #999;
+          color: var(--color-text-muted);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -184,12 +186,12 @@ export default function CartItem({ item, baseUrl }: Props) {
         }
 
         .remove-btn:hover {
-          color: #ef4444;
+          color: var(--color-error);
         }
 
         .cart-item-subtotal {
           font-weight: 600;
-          color: #1a1a1a;
+          color: var(--color-accent-light);
           font-size: 0.95rem;
           text-align: right;
           min-width: 70px;

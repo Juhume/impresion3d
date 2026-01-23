@@ -12,13 +12,13 @@ const STATUS_LABELS: Record<string, string> = {
   cancelled: 'Cancelado',
 };
 
-const STATUS_COLORS: Record<string, string> = {
-  pending: '#f59e0b',
-  paid: '#3b82f6',
-  processing: '#8b5cf6',
-  shipped: '#06b6d4',
-  delivered: '#22c55e',
-  cancelled: '#ef4444',
+const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
+  pending: { bg: 'rgba(245, 158, 11, 0.15)', text: '#f59e0b' },
+  paid: { bg: 'rgba(59, 130, 246, 0.15)', text: '#3b82f6' },
+  processing: { bg: 'rgba(139, 92, 246, 0.15)', text: '#8b5cf6' },
+  shipped: { bg: 'rgba(6, 182, 212, 0.15)', text: '#06b6d4' },
+  delivered: { bg: 'rgba(34, 197, 94, 0.15)', text: '#22c55e' },
+  cancelled: { bg: 'rgba(239, 68, 68, 0.15)', text: '#ef4444' },
 };
 
 const STATUS_STEPS = ['pending', 'paid', 'processing', 'shipped', 'delivered'];
@@ -124,7 +124,7 @@ export default function OrderHistory() {
                 </div>
                 <span
                   className="order-status"
-                  style={{ backgroundColor: STATUS_COLORS[order.status] }}
+                  style={{ backgroundColor: STATUS_COLORS[order.status]?.bg, color: STATUS_COLORS[order.status]?.text }}
                 >
                   {STATUS_LABELS[order.status]}
                 </span>
@@ -199,7 +199,7 @@ export default function OrderHistory() {
               <div className="modal-status">
                 <span
                   className="status-badge"
-                  style={{ backgroundColor: STATUS_COLORS[selectedOrder.status] }}
+                  style={{ backgroundColor: STATUS_COLORS[selectedOrder.status]?.bg, color: STATUS_COLORS[selectedOrder.status]?.text }}
                 >
                   {STATUS_LABELS[selectedOrder.status]}
                 </span>
@@ -295,7 +295,7 @@ export default function OrderHistory() {
         .orders-container h2 {
           font-size: 1.25rem;
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
           margin: 0 0 24px 0;
         }
 
@@ -308,8 +308,8 @@ export default function OrderHistory() {
         .spinner {
           width: 32px;
           height: 32px;
-          border: 3px solid #e5e5e5;
-          border-top-color: #2563eb;
+          border: 3px solid var(--color-border);
+          border-top-color: var(--color-accent);
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
           margin: 0 auto 16px;
@@ -322,9 +322,9 @@ export default function OrderHistory() {
         .orders-empty {
           text-align: center;
           padding: 48px 24px;
-          background-color: #f9fafb;
-          border-radius: 12px;
-          border: 1px dashed #d1d5db;
+          background-color: var(--color-surface);
+          border-radius: var(--radius-md);
+          border: 1px dashed var(--color-border);
         }
 
         .empty-icon {
@@ -333,7 +333,7 @@ export default function OrderHistory() {
         }
 
         .orders-empty p {
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 0 0 20px 0;
         }
 
@@ -344,10 +344,11 @@ export default function OrderHistory() {
         }
 
         .order-card {
-          background-color: white;
-          border: 1px solid #e5e5e5;
-          border-radius: 12px;
+          background-color: var(--color-bg-elevated);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
           overflow: hidden;
+          box-shadow: var(--shadow-sm);
         }
 
         .order-header {
@@ -355,8 +356,8 @@ export default function OrderHistory() {
           justify-content: space-between;
           align-items: center;
           padding: 16px 20px;
-          background-color: #f9fafb;
-          border-bottom: 1px solid #e5e5e5;
+          background-color: var(--color-surface);
+          border-bottom: 1px solid var(--color-border);
         }
 
         .order-info {
@@ -367,18 +368,17 @@ export default function OrderHistory() {
 
         .order-number {
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
         }
 
         .order-date {
           font-size: 0.85rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
         }
 
         .order-status,
         .status-badge {
           padding: 6px 12px;
-          color: white;
           font-size: 0.75rem;
           font-weight: 600;
           border-radius: 20px;
@@ -405,13 +405,13 @@ export default function OrderHistory() {
         .order-tracking .label,
         .order-address .label {
           font-size: 0.8rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
         }
 
         .summary-item .value {
           font-size: 1.1rem;
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
         }
 
         .order-tracking {
@@ -420,65 +420,65 @@ export default function OrderHistory() {
 
         .tracking-number {
           font-family: monospace;
-          background-color: #f3f4f6;
+          background-color: var(--color-surface);
           padding: 4px 8px;
-          border-radius: 4px;
+          border-radius: var(--radius-sm);
           margin-left: 8px;
         }
 
         .order-address p {
           margin: 4px 0 0 0;
           font-size: 0.9rem;
-          color: #374151;
+          color: var(--color-text-secondary);
           line-height: 1.5;
         }
 
         .order-footer {
           padding: 16px 20px;
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid var(--color-border);
         }
 
         .btn-primary {
           display: inline-block;
           padding: 12px 24px;
-          background-color: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           font-size: 0.95rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
           text-decoration: none;
-          transition: background-color 0.15s;
+          transition: var(--transition-fast);
         }
 
         .btn-primary:hover {
-          background-color: #1d4ed8;
+          background-color: var(--color-accent-dark);
         }
 
         .btn-secondary {
           display: inline-block;
           padding: 10px 20px;
-          background-color: #f3f4f6;
-          color: #374151;
+          background-color: var(--color-surface);
+          color: var(--color-text-secondary);
           font-size: 0.875rem;
           font-weight: 600;
           border: none;
-          border-radius: 8px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
           text-decoration: none;
-          transition: background-color 0.15s;
+          transition: var(--transition-fast);
         }
 
         .btn-secondary:hover {
-          background-color: #e5e7eb;
+          background-color: var(--color-border);
         }
 
         /* Modal */
         .order-modal-overlay {
           position: fixed;
           inset: 0;
-          background-color: rgba(0, 0, 0, 0.5);
+          background-color: rgba(0, 0, 0, 0.7);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -487,12 +487,13 @@ export default function OrderHistory() {
         }
 
         .order-modal {
-          background: white;
-          border-radius: 16px;
+          background: var(--color-bg-elevated);
+          border-radius: var(--radius-md);
           width: 100%;
           max-width: 500px;
           max-height: 90vh;
           overflow-y: auto;
+          box-shadow: var(--shadow-lg);
         }
 
         .modal-header {
@@ -500,19 +501,19 @@ export default function OrderHistory() {
           justify-content: space-between;
           align-items: flex-start;
           padding: 20px 24px;
-          border-bottom: 1px solid #e5e5e5;
+          border-bottom: 1px solid var(--color-border);
         }
 
         .modal-header h3 {
           font-size: 1.125rem;
           font-weight: 600;
           margin: 0;
-          color: #111827;
+          color: var(--color-text);
         }
 
         .modal-date {
           font-size: 0.85rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 4px 0 0 0;
         }
 
@@ -520,16 +521,16 @@ export default function OrderHistory() {
           width: 32px;
           height: 32px;
           border: none;
-          background: #f3f4f6;
-          border-radius: 8px;
+          background: var(--color-surface);
+          border-radius: var(--radius-sm);
           font-size: 1rem;
           cursor: pointer;
-          color: #6b7280;
-          transition: background-color 0.15s;
+          color: var(--color-text-muted);
+          transition: var(--transition-fast);
         }
 
         .close-btn:hover {
-          background-color: #e5e7eb;
+          background-color: var(--color-border);
         }
 
         .modal-body {
@@ -543,8 +544,8 @@ export default function OrderHistory() {
         .order-progress {
           display: flex;
           justify-content: space-between;
-          background-color: #f9fafb;
-          border-radius: 8px;
+          background-color: var(--color-surface);
+          border-radius: var(--radius-sm);
           padding: 16px;
           margin-bottom: 24px;
         }
@@ -560,8 +561,8 @@ export default function OrderHistory() {
           width: 28px;
           height: 28px;
           border-radius: 50%;
-          background-color: #e5e5e5;
-          color: #9ca3af;
+          background-color: var(--color-border);
+          color: var(--color-text-muted);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -570,31 +571,31 @@ export default function OrderHistory() {
         }
 
         .progress-step.completed .step-circle {
-          background-color: #22c55e;
-          color: white;
+          background-color: rgba(34, 197, 94, 0.15);
+          color: var(--color-success);
         }
 
         .progress-step.current .step-circle {
-          background-color: #2563eb;
-          color: white;
+          background-color: rgba(212, 175, 55, 0.15);
+          color: var(--color-accent);
         }
 
         .step-label {
           font-size: 0.65rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
           text-align: center;
         }
 
         .progress-step.completed .step-label,
         .progress-step.current .step-label {
-          color: #111827;
+          color: var(--color-text);
           font-weight: 500;
         }
 
         .modal-section {
           margin-bottom: 20px;
           padding-bottom: 20px;
-          border-bottom: 1px solid #e5e5e5;
+          border-bottom: 1px solid var(--color-border);
         }
 
         .modal-section:last-child {
@@ -606,7 +607,7 @@ export default function OrderHistory() {
         .modal-section h4 {
           font-size: 0.85rem;
           font-weight: 600;
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin: 0 0 8px 0;
           text-transform: uppercase;
           letter-spacing: 0.05em;
@@ -614,14 +615,14 @@ export default function OrderHistory() {
 
         .modal-section p {
           margin: 0;
-          color: #374151;
+          color: var(--color-text-secondary);
           font-size: 0.9rem;
           line-height: 1.5;
         }
 
         .date-info {
           font-size: 0.85rem;
-          color: #6b7280;
+          color: var(--color-text-muted);
           margin-top: 4px;
         }
 
@@ -629,17 +630,17 @@ export default function OrderHistory() {
           display: flex;
           justify-content: space-between;
           font-size: 0.9rem;
-          color: #4b5563;
+          color: var(--color-text-secondary);
           padding: 4px 0;
         }
 
         .summary-section .summary-row.total {
           padding-top: 12px;
           margin-top: 8px;
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid var(--color-border);
           font-size: 1rem;
           font-weight: 600;
-          color: #111827;
+          color: var(--color-text);
         }
 
         @media (max-width: 480px) {

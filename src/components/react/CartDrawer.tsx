@@ -145,7 +145,7 @@ export default function CartDrawer({ baseUrl }: Props) {
         .cart-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.6);
           opacity: 0;
           visibility: hidden;
           transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -164,8 +164,9 @@ export default function CartDrawer({ baseUrl }: Props) {
           bottom: 0;
           width: 100%;
           max-width: 420px;
-          background: white;
-          box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+          background: var(--color-bg-elevated);
+          border-left: 1px solid var(--color-border);
+          box-shadow: var(--shadow-xl);
           transform: translateX(100%);
           transition: transform 0.3s ease;
           z-index: 999;
@@ -182,7 +183,7 @@ export default function CartDrawer({ baseUrl }: Props) {
           align-items: center;
           justify-content: space-between;
           padding: 20px 24px;
-          border-bottom: 1px solid #e5e5e5;
+          border-bottom: 1px solid var(--color-border);
           flex-shrink: 0;
         }
 
@@ -190,6 +191,7 @@ export default function CartDrawer({ baseUrl }: Props) {
           font-size: 1.25rem;
           font-weight: 600;
           margin: 0;
+          color: var(--color-text);
         }
 
         .close-btn {
@@ -197,7 +199,7 @@ export default function CartDrawer({ baseUrl }: Props) {
           border: none;
           cursor: pointer;
           padding: 4px;
-          color: #666;
+          color: var(--color-text-muted);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -205,7 +207,7 @@ export default function CartDrawer({ baseUrl }: Props) {
         }
 
         .close-btn:hover {
-          color: #1a1a1a;
+          color: var(--color-text);
         }
 
         .cart-content {
@@ -221,11 +223,12 @@ export default function CartDrawer({ baseUrl }: Props) {
           justify-content: center;
           height: 100%;
           text-align: center;
-          color: #666;
+          color: var(--color-text-muted);
         }
 
         .cart-empty svg {
           margin-bottom: 16px;
+          stroke: var(--color-text-muted);
         }
 
         .cart-empty p {
@@ -236,16 +239,17 @@ export default function CartDrawer({ baseUrl }: Props) {
         .btn-browse {
           display: inline-block;
           padding: 12px 24px;
-          background: #2563eb;
-          color: white;
-          border-radius: 8px;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
+          border-radius: var(--radius-sm);
           text-decoration: none;
-          font-weight: 500;
-          transition: background 0.15s ease;
+          font-weight: 600;
+          transition: all var(--transition-fast);
         }
 
         .btn-browse:hover {
-          background: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .cart-items {
@@ -258,24 +262,24 @@ export default function CartDrawer({ baseUrl }: Props) {
           padding: 10px;
           margin: 8px 0 16px;
           background: none;
-          border: 1px solid #e5e5e5;
-          border-radius: 6px;
-          color: #666;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-sm);
+          color: var(--color-text-muted);
           font-size: 0.85rem;
           cursor: pointer;
           transition: all 0.15s ease;
         }
 
         .clear-cart-btn:hover {
-          border-color: #ef4444;
-          color: #ef4444;
+          border-color: var(--color-error);
+          color: var(--color-error);
         }
 
         .cart-footer {
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid var(--color-border);
           padding: 20px 24px;
           flex-shrink: 0;
-          background: #fafafa;
+          background: var(--color-surface);
         }
 
         .cart-totals {
@@ -287,42 +291,44 @@ export default function CartDrawer({ baseUrl }: Props) {
           justify-content: space-between;
           padding: 6px 0;
           font-size: 0.9rem;
-          color: #666;
+          color: var(--color-text-secondary);
         }
 
         .total-final {
           font-size: 1.1rem;
           font-weight: 600;
-          color: #1a1a1a;
+          color: var(--color-text);
           padding-top: 12px;
           margin-top: 8px;
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid var(--color-border);
         }
 
         .checkout-btn {
           display: block;
           width: 100%;
           padding: 14px 24px;
-          background: #2563eb;
-          color: white;
+          background: var(--gradient-primary);
+          color: var(--color-bg);
           border: none;
-          border-radius: 10px;
+          border-radius: var(--radius-sm);
           font-size: 1rem;
           font-weight: 600;
           text-align: center;
           text-decoration: none;
           cursor: pointer;
-          transition: background 0.15s ease;
+          transition: all var(--transition-fast);
+          box-shadow: var(--shadow-glow-sm);
         }
 
         .checkout-btn:hover {
-          background: #1d4ed8;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
         }
 
         .cart-note {
           margin: 12px 0 0;
           font-size: 0.8rem;
-          color: #888;
+          color: var(--color-text-muted);
           text-align: center;
         }
 
